@@ -24,7 +24,7 @@
     <header>
         <div class="content-wrapper">
             <div class="float-left">
-                <p class="site-title"><a runat="server" href="~/">your logo here</a></p>
+                <p class="site-title"><a runat="server" href="~/">Alu-Style</a></p>
             </div>
             <div class="float-right">
                 <section id="login">
@@ -46,9 +46,10 @@
                 </section>
                 <nav>
                     <ul id="menu">
+                        <li><a runat="server" href="~/Default">Kezdőlap</a></li>
                         <li><a runat="server" href="~/Atlantic">Atlantic</a></li>
                         <li><a runat="server" href="~/LoftSolo">Loft Solo</a></li>
-                        <li><a runat="server" href="~/Other">Egyéb</a></li>
+                        <li><a runat="server" href="~/Other">Egyéb alkatrész és szálanyag</a></li>
                     </ul>
                 </nav>
             </div>
@@ -58,7 +59,6 @@
         <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
         <section class="content-wrapper main-content clear-fix">
             <asp:ContentPlaceHolder runat="server" ID="MainContent" />
-            <asp:ContentPlaceHolder runat="server" ID="MainContent2" />
         </section>
     </div>
     <footer>
