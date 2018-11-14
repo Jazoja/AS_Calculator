@@ -40,16 +40,15 @@
                                 Hello, <a runat="server" class="username" href="~/Account/Manage" title="Manage your account">
                                     <asp:LoginName runat="server" CssClass="username" />
                                 </a>!
-                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
                             </p>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </section>
                 <nav>
                     <ul id="menu">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <li><a runat="server" href="~/Atlantic">Atlantic</a></li>
+                        <li><a runat="server" href="~/LoftSolo">Loft Solo</a></li>
+                        <li><a runat="server" href="~/Other">Egyéb</a></li>
                     </ul>
                 </nav>
             </div>
@@ -59,6 +58,7 @@
         <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
         <section class="content-wrapper main-content clear-fix">
             <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+            <asp:ContentPlaceHolder runat="server" ID="MainContent2" />
         </section>
     </div>
     <footer>
