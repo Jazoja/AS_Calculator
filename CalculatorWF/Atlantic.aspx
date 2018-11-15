@@ -17,22 +17,97 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 
+    <div class="container-fluid">
+      <div class="row">
+        
+          <div class="col-md-4">
+            <asp:Label ID="lblRendszer" runat="server" Text="Rendszer"/>
+            <br />
+            <asp:DropDownList ID="ddlSystems" runat="server" AutoPostBack="true"/>
+          </div>
+        
+          <div class="col-md-2">
+            <asp:Label ID="lblBeepitesiMod" runat="server" Text="Beépítési mód"/>
+            <br />
+            <asp:DropDownList ID="ddlBeepitesiMod" runat="server" AutoPostBack="true"/>
+          </div>
 
-    <asp:Label ID="lblRendszer" runat="server" Text="Rendszer"/>
-    <asp:DropDownList ID="ddlSystems" runat="server" AutoPostBack="true"/>
+        <div class="col-md-2">
+            <asp:Label ID="lblSinekSzama" runat="server" Text="Sínek száma"/>
+            <br />
+            <asp:DropDownList ID="ddlSinekSZama" runat="server" AutoPostBack="true"/>
+        </div>
 
-    <asp:Label ID="lblBeepitesiMod" runat="server" Text="Beépítési mód"/>
-    <asp:DropDownList ID="ddlBeepitesiMod" runat="server" AutoPostBack="true"/>
+        <div class="col-md-2">
+            <asp:Label ID="lblSinHossza" runat="server" Text="Sín hossza"/>
+            <br />
+            <asp:TextBox ID="edSinHossza" runat="server"/>
+        </div>
 
-    <asp:Label ID="lblSinekSzama" runat="server" Text="Sínek száma"/>
+        <div class="col-md-2">
+            <asp:Label ID="lblAjtokSzama" runat="server" Text="Ajtók száma"/>
+            <br />
+            <asp:DropDownList ID="ddlAjtokSzama" runat="server" AutoPostBack="true"/>
+        </div>
 
-    <asp:Label ID="lblSinHossza" runat="server" Text="Sín hossza"/>
+      </div>
+        <div class="row">
+            <div class="col-md-2">
+                
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+            <div class="col-md-2">
+                
+            </div>
+            <div class="col-md-2">
+                
+            </div>
+            <div class="col-md-2">
 
-    <asp:Label ID="lblAjtokSzama" runat="server" Text="Ajtók száma"/>
+            </div>
+        </div>
 
-    <asp:Label ID="lblAjtoMeret" runat="server" Text="Ajtó méret"/>
+        <div class="row">
+            <div class="col-md-2">
+                <asp:Label ID="lblAjtoMeret" runat="server" Text="Ajtó méret"/>
+                
+            </div>
+        </div>
 
-    <asp:Label ID="lblmagassag" runat="server" Text="Sín hossza"/>
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    <asp:Label ID="lblMagassag" runat="server" Text="Sín hossza"/>
     
     <asp:Label ID="lblSzelesseg" runat="server" Text="Sín hossza"/>
 

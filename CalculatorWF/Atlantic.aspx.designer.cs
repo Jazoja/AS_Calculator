@@ -58,6 +58,15 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.Label lblSinekSzama;
         
         /// <summary>
+        /// ddlSinekSZama control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSinekSZama;
+        
+        /// <summary>
         /// lblSinHossza control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace CalculatorWF {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSinHossza;
+        
+        /// <summary>
+        /// edSinHossza control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edSinHossza;
         
         /// <summary>
         /// lblAjtokSzama control.
@@ -76,6 +94,15 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.Label lblAjtokSzama;
         
         /// <summary>
+        /// ddlAjtokSzama control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAjtokSzama;
+        
+        /// <summary>
         /// lblAjtoMeret control.
         /// </summary>
         /// <remarks>
@@ -85,13 +112,13 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.Label lblAjtoMeret;
         
         /// <summary>
-        /// lblmagassag control.
+        /// lblMagassag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblmagassag;
+        protected global::System.Web.UI.WebControls.Label lblMagassag;
         
         /// <summary>
         /// lblSzelesseg control.
