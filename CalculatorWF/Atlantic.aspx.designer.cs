@@ -13,22 +13,22 @@ namespace CalculatorWF {
     public partial class About {
         
         /// <summary>
-        /// lblRendszer control.
+        /// lblRendszerTipus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRendszer;
+        protected global::System.Web.UI.WebControls.Label lblRendszerTipus;
         
         /// <summary>
-        /// ddlSystems control.
+        /// ddlRendszerTipus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSystems;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRendszerTipus;
         
         /// <summary>
         /// lblBeepitesiMod control.
@@ -58,13 +58,13 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.Label lblSinekSzama;
         
         /// <summary>
-        /// ddlSinekSZama control.
+        /// ddlSinekSzama control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSinekSZama;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSinekSzama;
         
         /// <summary>
         /// lblSinHossza control.
@@ -112,6 +112,42 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.Label lblAjtoMeret;
         
         /// <summary>
+        /// lblAjto1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAjto1;
+        
+        /// <summary>
+        /// lblAjto2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAjto2;
+        
+        /// <summary>
+        /// lblAjto3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAjto3;
+        
+        /// <summary>
+        /// lblAjto4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAjto4;
+        
+        /// <summary>
         /// lblMagassag control.
         /// </summary>
         /// <remarks>
@@ -119,6 +155,42 @@ namespace CalculatorWF {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMagassag;
+        
+        /// <summary>
+        /// edMagassagAjto1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edMagassagAjto1;
+        
+        /// <summary>
+        /// edMagassagAjto2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edMagassagAjto2;
+        
+        /// <summary>
+        /// edMagassagAjto3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edMagassagAjto3;
+        
+        /// <summary>
+        /// edMagassagAjto4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edMagassagAjto4;
         
         /// <summary>
         /// lblSzelesseg control.
@@ -130,6 +202,42 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.Label lblSzelesseg;
         
         /// <summary>
+        /// edSzelessegAjto1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edSzelessegAjto1;
+        
+        /// <summary>
+        /// edSzelessegAjto2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edSzelessegAjto2;
+        
+        /// <summary>
+        /// edSzelessegAjto3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edSzelessegAjto3;
+        
+        /// <summary>
+        /// edSzelessegAjto4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edSzelessegAjto4;
+        
+        /// <summary>
         /// lblAjtoBetet control.
         /// </summary>
         /// <remarks>
@@ -137,6 +245,42 @@ namespace CalculatorWF {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAjtoBetet;
+        
+        /// <summary>
+        /// ddlAjtoBetet1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAjtoBetet1;
+        
+        /// <summary>
+        /// ddlAjtoBetet2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAjtoBetet2;
+        
+        /// <summary>
+        /// ddlAjtoBetet3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAjtoBetet3;
+        
+        /// <summary>
+        /// ddlAjtoBetet4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAjtoBetet4;
         
         /// <summary>
         /// lblVasalat control.
@@ -148,6 +292,42 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.Label lblVasalat;
         
         /// <summary>
+        /// ddlVasalat1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlVasalat1;
+        
+        /// <summary>
+        /// ddlVasalat2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlVasalat2;
+        
+        /// <summary>
+        /// ddlVasalat3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlVasalat3;
+        
+        /// <summary>
+        /// ddlVasalat4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlVasalat4;
+        
+        /// <summary>
         /// lblOsztokSzama control.
         /// </summary>
         /// <remarks>
@@ -157,6 +337,42 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.Label lblOsztokSzama;
         
         /// <summary>
+        /// ddlOsztokSzamaAjto1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOsztokSzamaAjto1;
+        
+        /// <summary>
+        /// ddlOsztokSzamaAjto2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOsztokSzamaAjto2;
+        
+        /// <summary>
+        /// ddlOsztokSzamaAjto3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOsztokSzamaAjto3;
+        
+        /// <summary>
+        /// ddlOsztokSzamaAjto4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOsztokSzamaAjto4;
+        
+        /// <summary>
         /// lblOpciok control.
         /// </summary>
         /// <remarks>
@@ -164,5 +380,41 @@ namespace CalculatorWF {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOpciok;
+        
+        /// <summary>
+        /// ddlOpciokAjto1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOpciokAjto1;
+        
+        /// <summary>
+        /// ddlOpciokAjto2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOpciokAjto2;
+        
+        /// <summary>
+        /// ddlOpciokAjto3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOpciokAjto3;
+        
+        /// <summary>
+        /// ddlOpciokAjto4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOpciokAjto4;
     }
 }

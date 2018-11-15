@@ -21,9 +21,9 @@
       <div class="row">
         
           <div class="col-md-4">
-            <asp:Label ID="lblRendszer" runat="server" Text="Rendszer"/>
+            <asp:Label ID="lblRendszerTipus" runat="server" Text="Rendszer"/>
             <br />
-            <asp:DropDownList ID="ddlSystems" runat="server" AutoPostBack="true"/>
+            <asp:DropDownList ID="ddlRendszerTipus" runat="server" AutoPostBack="true"/>
           </div>
         
           <div class="col-md-2">
@@ -35,7 +35,7 @@
         <div class="col-md-2">
             <asp:Label ID="lblSinekSzama" runat="server" Text="Sínek száma"/>
             <br />
-            <asp:DropDownList ID="ddlSinekSZama" runat="server" AutoPostBack="true"/>
+            <asp:DropDownList ID="ddlSinekSzama" runat="server" AutoPostBack="true"/>
         </div>
 
         <div class="col-md-2">
@@ -72,53 +72,186 @@
         <div class="row">
             <div class="col-md-2">
                 <asp:Label ID="lblAjtoMeret" runat="server" Text="Ajtó méret"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:Label ID="lblAjto1" runat="server" Text="Ajtó 1"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:Label ID="lblAjto2" runat="server" Text="Ajtó 2"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:Label ID="lblAjto3" runat="server" Text="Ajtó 3"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:Label ID="lblAjto4" runat="server" Text="Ajtó 4"/>
+            </div>
+
+            <div class="col-md-2">
+                
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <asp:Label ID="lblMagassag" runat="server" Text="Magasság"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:TextBox ID="edMagassagAjto1" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:TextBox ID="edMagassagAjto2" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:TextBox ID="edMagassagAjto3" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:TextBox ID="edMagassagAjto4" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
                 
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-2">
-
+                <asp:Label ID="lblSzelesseg" runat="server" Text="Szélesség"/>
             </div>
+
+            <div class="col-md-2">
+                <asp:TextBox ID="edSzelessegAjto1" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:TextBox ID="edSzelessegAjto2" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:TextBox ID="edSzelessegAjto3" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:TextBox ID="edSzelessegAjto4" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                
+            </div>
+
         </div>
 
         <div class="row">
             <div class="col-md-2">
-
+                <asp:Label ID="lblAjtoBetet" runat="server" Text="Ajtó betét"/>
             </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlAjtoBetet1" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlAjtoBetet2" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlAjtoBetet3" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlAjtoBetet4" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+            </div>
+
         </div>
 
+        <div class="row">
+            <div class="col-md-2">
+                <asp:Label ID="lblVasalat" runat="server" Text="Vasalat"/>
+            </div>
 
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlVasalat1" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlVasalat2" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlVasalat3" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlVasalat4" runat="server" AutoPostBack="true"/>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <asp:Label ID="lblOsztokSzama" runat="server" Text="Osztók száma"/>
+            </div>
+
+            
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlOsztokSzamaAjto1" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlOsztokSzamaAjto2" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlOsztokSzamaAjto3" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlOsztokSzamaAjto4" runat="server"/>
+            </div>
+
+            <div class="col-md-2">
+                
+            </div>
+
+        </div>
+        
+        <div class="row">
+            <div class="col-md-2">
+                <asp:Label ID="lblOpciok" runat="server" Text="Opciók"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlOpciokAjto1" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlOpciokAjto2" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlOpciokAjto3" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlOpciokAjto4" runat="server" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+            </div>
+
+        </div>
 
     </div>
-
-
-    
-    
-
-    
-
-
-    
-
-    
-
-    
-
-    
-
-    <asp:Label ID="lblMagassag" runat="server" Text="Sín hossza"/>
-    
-    <asp:Label ID="lblSzelesseg" runat="server" Text="Sín hossza"/>
-
-    <asp:Label ID="lblAjtoBetet" runat="server" Text="Ajtó betét"/>
-
-    <asp:Label ID="lblVasalat" runat="server" Text="Vasalat"/>
-
-    <asp:Label ID="lblOsztokSzama" runat="server" Text="Osztók száma"/>
-
-    <asp:Label ID="lblOpciok" runat="server" Text="Opciók"/>
-
-<br />
 
 </asp:Content>

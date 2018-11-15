@@ -1,7 +1,4 @@
-﻿
-Anyádd!!!
-
-html {
+﻿html {
     background-color: #e2e2e2;
     margin: 0;
     padding: 0;
@@ -410,7 +407,7 @@ fieldset {
         font-size: 1.2em;
         margin: 5px 0 6px 0;
         padding: 5px;
-        width: 100%;
+        width: 80%;
     }
 
     textarea {
