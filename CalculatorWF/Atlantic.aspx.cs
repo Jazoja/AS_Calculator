@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Reflection;
+using System.Collections.Specialized;
+
 
 namespace CalculatorWF
 {
@@ -13,13 +15,29 @@ namespace CalculatorWF
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack)
-            { }
+            { 
+            
+            }
             else
             {
+                
+                NameValueCollection nvcRendszerTipusok = new NameValueCollection();
+                nvcRendszerTipusok[""] = "";
+                nvcRendszerTipusok["slide_out"] = "Tolóajtó";
+                nvcRendszerTipusok["slide_in"] = "Falban futó tolóajtó";
+                nvcRendszerTipusok["swing_slim"] = "Nyíló ajtó aluminium tok 100-125";
+                nvcRendszerTipusok["swing_thin"] = "Nyíló ajtó aluminium tok 125 -";
+                nvcRendszerTipusok["swing_door_normal"] = "Nyíló ajtó - Csak ajtó normál szárny";
+                nvcRendszerTipusok["swing_door_fix"] = "Nyíló ajtó - Csak ajtó fix szárny";
+                nvcRendszerTipusok["screen"] = "Screen";
+                
                 string[] sRendszerTipusok = { "", "Tolóajtó", "Falban futó tolóajtó", "Nyíló ajtó - Csak ajtó normál szárny", "Nyíló ajtó - Csak ajtó fix szárny", "Screen", "Nyíló ajtó aluminium tok 100-125", "Nyíló ajtó aluminium tok 125 -" };
-                foreach (string sRendszerTipus in sRendszerTipusok)
+                //foreach (string sRendszerTipus in sRendszerTipusok)
+                foreach (string sRendszerTipus in nvcRendszerTipusok)
                 {
-                    ddlRendszerTipus.Items.Add(sRendszerTipus);
+                    string sRendszerTipusNev = nvcRendszerTipusok[sRendszerTipus];
+                    ListItem liRendszerTipus = new ListItem(sRendszerTipusNev, sRendszerTipus);
+                    ddlRendszerTipus.Items.Add(liRendszerTipus);
                 }
 
                 string[] sBeepitesiModok = {"", "P1", "F1", "P2"};
@@ -76,6 +94,7 @@ namespace CalculatorWF
                     ddlOpciokAjto3.Items.Add(sOpcio);
                     ddlOpciokAjto4.Items.Add(sOpcio);
                 }
+
 
             }
 
