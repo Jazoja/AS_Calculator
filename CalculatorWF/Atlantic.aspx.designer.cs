@@ -103,6 +103,60 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.DropDownList ddlAjtokSzama;
         
         /// <summary>
+        /// lblNyilasMagassag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNyilasMagassag;
+        
+        /// <summary>
+        /// edNyilasMagassag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edNyilasMagassag;
+        
+        /// <summary>
+        /// lblNyilasSzelesseg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNyilasSzelesseg;
+        
+        /// <summary>
+        /// edNyilasSzelesseg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edNyilasSzelesseg;
+        
+        /// <summary>
+        /// lblFalvastagság control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFalvastagság;
+        
+        /// <summary>
+        /// edFalvastagsag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edFalvastagsag;
+        
+        /// <summary>
         /// lblAjtoMeret control.
         /// </summary>
         /// <remarks>

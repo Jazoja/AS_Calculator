@@ -16,7 +16,8 @@
     <AssemblyName>CalculatorWF</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
@@ -307,6 +308,7 @@
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="LoftSolo.aspx.cs">
       <DependentUpon>LoftSolo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
