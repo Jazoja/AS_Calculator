@@ -341,6 +341,10 @@ namespace CalculatorWF
                 edSzelessegAjto2.Text = rSV.rRendszer.rAjto[2].nSzelesseg.ToString();
                 edSzelessegAjto3.Text = rSV.rRendszer.rAjto[3].nSzelesseg.ToString();
                 edSzelessegAjto4.Text = rSV.rRendszer.rAjto[4].nSzelesseg.ToString();
+
+                edNyilasMagassag.Text = rSV.rRendszer.nNyilasMagassag.ToString();
+                edNyilasSzelesseg.Text = rSV.rRendszer.nNyilasSzelesseg.ToString();
+                edFalvastagsag.Text = rSV.rRendszer.nFalVastagsag.ToString();
             }
 
         }
