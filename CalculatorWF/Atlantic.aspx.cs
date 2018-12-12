@@ -12,7 +12,12 @@ namespace CalculatorWF
 {
     public partial class About : Page
     {
-        struSitevariables rSV;
+        struSiteVariables rSV;
+
+        protected void Page_PreLoad(object sender, EventArgs e)
+        {
+            rSV = Vars.SiteVars;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -84,6 +89,7 @@ namespace CalculatorWF
                 {
                     ddlBeepitesiMod.Items.Add(sBeepMod);
                 }
+                ddlBeepitesiMod.SelectedValue = rSV.rRendszer.sBeepitesiMod;
 
                 int nMaxSinekSzama = 4;
                 for (int nSinekSzama = 0; nSinekSzama <= nMaxSinekSzama; nSinekSzama++)
@@ -137,7 +143,10 @@ namespace CalculatorWF
 
         }
 
-
+        protected void Page_Unload(object sender, EventArgs e)
+        {
+            Vars.SiteVars = rSV;
+        }
 
         public void Calculate()
         {
@@ -151,47 +160,49 @@ namespace CalculatorWF
 
         protected void ddlBeepitesiMod_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        protected void ddlBeepitesiMod_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-
+            rSV.rRendszer.sBeepitesiMod = ddlBeepitesiMod.SelectedValue;
         }
 
         protected void ddlSinekSzama_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            rSV.rRendszer.nSinekSzama = Int16.Parse(ddlSinekSzama.SelectedValue);
         }
 
         protected void ddlAjtokSzama_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            int nAjtokSzama = Int16.Parse(ddlAjtokSzama.SelectedValue);
+            rSV.rRendszer.SetAjtokSzama(nAjtokSzama);
         }
 
         protected void edNyilasMagassag_TextChanged(object sender, EventArgs e)
         {
-
+            rSV.rRendszer.nNyilasMagassag = Int16.Parse(edNyilasMagassag.Text);
         }
 
         protected void edNyilasSzelesseg_TextChanged(object sender, EventArgs e)
         {
-
+            rSV.rRendszer.nNyilasSzelesseg = Int16.Parse(edNyilasSzelesseg.Text);
         }
 
         protected void edFalvastagsag_TextChanged(object sender, EventArgs e)
         {
-
+            rSV.rRendszer.nFalVastagsag = Int16.Parse(edFalvastagsag.Text);
         }
 
         protected void edMagassagAjto_TextChanged(object sender, EventArgs e)
         {
-
+            Int16.TryParse(edMagassagAjto1.Text, out rSV.rRendszer.rAjto[1].nMagassag);
+            Int16.TryParse(edMagassagAjto2.Text, out rSV.rRendszer.rAjto[2].nMagassag);
+            Int16.TryParse(edMagassagAjto3.Text, out rSV.rRendszer.rAjto[3].nMagassag);
+            Int16.TryParse(edMagassagAjto4.Text, out rSV.rRendszer.rAjto[4].nMagassag);
         }
 
         protected void edSzelessegAjto_TextChanged(object sender, EventArgs e)
         {
-
+            Int16.TryParse(edSzelessegAjto1.Text, out rSV.rRendszer.rAjto[1].nSzelesseg);
+            Int16.TryParse(edSzelessegAjto2.Text, out rSV.rRendszer.rAjto[2].nSzelesseg);
+            Int16.TryParse(edSzelessegAjto3.Text, out rSV.rRendszer.rAjto[3].nSzelesseg);
+            Int16.TryParse(edSzelessegAjto4.Text, out rSV.rRendszer.rAjto[4].nSzelesseg);
         }
 
         protected void ddlAjtoBetet_SelectedIndexChanged(object sender, EventArgs e)

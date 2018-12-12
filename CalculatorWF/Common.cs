@@ -3,6 +3,14 @@ using System.Xml.Serialization;
 
 namespace CalculatorWF
 {
+    public static class Vars
+    {
+        public static struSiteVariables SiteVars
+        {
+            get { try { return (struSiteVariables)System.Web.HttpContext.Current.Session["SiteVariables"]; } catch { return default(struSiteVariables); } }
+            set { try { System.Web.HttpContext.Current.Session["SiteVariables"] = value; } catch { } }
+        }
+    }
     public struct struCeg
     {
         public int nCegKey;
@@ -173,9 +181,13 @@ namespace CalculatorWF
     public struct struRendszer
     {
         public string sRendszerTipus;
-        
+        public string sBeepitesiMod;
         public string sSin;
         public string sTok;
+
+        public int nNyilasMagassag;
+        public int nNyilasSzelesseg;
+        public int nFalVastagsag;
 
         public int nSinekSzama;
         public int nSinHossz;
@@ -183,12 +195,41 @@ namespace CalculatorWF
 
         public struAjto[] rAjto;
 
+        public struRendszer(string sState = "default")
+        {
+            this.sRendszerTipus = "";
+            this.sBeepitesiMod = "";
+
+            this.sSin = "";
+            this.sTok = "";
+
+            this.nNyilasMagassag = 0;
+            this.nNyilasSzelesseg = 0;
+            this.nFalVastagsag = 0;
+
+            this.nSinekSzama = 0;
+            this.nSinHossz = 0;
+            this.nAjtokSzama = 0;
+
+            this.rAjto = new struAjto[5];
+        }
+
+        public void SetAjtokSzama(int nAjtokSzama)
+        {
+            this.nAjtokSzama = nAjtokSzama;
+            //Array.Resize(ref this.rAjto, nAjtokSzama + 1);
+        }
         public struRendszer(struRendszer rRendszer)
         {
             this.sRendszerTipus = rRendszer.sRendszerTipus;
+            this.sBeepitesiMod = rRendszer.sBeepitesiMod;
             
             this.sSin = rRendszer.sSin;
             this.sTok = rRendszer.sTok;
+
+            this.nNyilasMagassag = rRendszer.nNyilasMagassag;
+            this.nNyilasSzelesseg = rRendszer.nNyilasSzelesseg;
+            this.nFalVastagsag = rRendszer.nFalVastagsag;
 
             this.nSinekSzama = rRendszer.nSinekSzama;
             this.nSinHossz = rRendszer.nSinHossz;
@@ -199,7 +240,7 @@ namespace CalculatorWF
         }
     }
 
-    public struct struSitevariables
+    public struct struSiteVariables
     {
         public string sHiba;
         public string sCalcID;
@@ -207,6 +248,27 @@ namespace CalculatorWF
 
         public struRendszer rRendszer;
         public struTetel[] rBontas;
+
+        public struSiteVariables(string sMode = "default")
+        {
+            sHiba = null;
+            sCalcID = "AT";
+            rFej = new struRendfej();
+
+            rRendszer = new struRendszer(sMode);
+            rBontas = new struTetel[0];
+        }
+
+        public struSiteVariables(struSiteVariables rSV)
+        {
+            this.sHiba = rSV.sHiba;
+            this.sCalcID = rSV.sCalcID;
+            this.rFej = rSV.rFej;
+
+            this.rRendszer = new struRendszer(rSV.rRendszer);
+            this.rBontas = new struTetel[rSV.rBontas.Length];
+            rSV.rBontas.CopyTo(this.rBontas, 0);
+        }
     }
 
     public static class Common

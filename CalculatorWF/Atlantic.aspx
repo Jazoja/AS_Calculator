@@ -59,7 +59,7 @@
             <div class="col-md-2">
                 <asp:Label ID="lblBeepitesiMod" runat="server" Text="Beépítési mód" />
                 <br />
-                <asp:DropDownList ID="ddlBeepitesiMod" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlBeepitesiMod_SelectedIndexChanged1"/>
+                <asp:DropDownList ID="ddlBeepitesiMod" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlBeepitesiMod_SelectedIndexChanged"/>
             </div>
 
             <div class="col-md-2">
@@ -140,19 +140,19 @@
             </div>
 
             <div class="col-md-2">
-                <asp:TextBox ID="edMagassagAjto1" runat="server" ToolTip="Ajtó1 magasság" OnTextChanged="edMagassagAjto_TextChanged"/>
+                <asp:TextBox ID="edMagassagAjto1" runat="server" ToolTip="Ajtó1 magasság" AutoPostBack="true" OnTextChanged="edMagassagAjto_TextChanged"/>
             </div>
 
             <div class="col-md-2">
-                <asp:TextBox ID="edMagassagAjto2" runat="server" ToolTip="Ajtó2 magasság" OnTextChanged="edMagassagAjto_TextChanged"/>
+                <asp:TextBox ID="edMagassagAjto2" runat="server" ToolTip="Ajtó2 magasság" AutoPostBack="true" OnTextChanged="edMagassagAjto_TextChanged"/>
             </div>
 
             <div class="col-md-2">
-                <asp:TextBox ID="edMagassagAjto3" runat="server" ToolTip="Ajtó3 magasság" OnTextChanged="edMagassagAjto_TextChanged"/>
+                <asp:TextBox ID="edMagassagAjto3" runat="server" ToolTip="Ajtó3 magasság" AutoPostBack="true" OnTextChanged="edMagassagAjto_TextChanged"/>
             </div>
 
             <div class="col-md-2">
-                <asp:TextBox ID="edMagassagAjto4" runat="server" ToolTip="Ajtó4 magasság" OnTextChanged="edMagassagAjto_TextChanged"/>
+                <asp:TextBox ID="edMagassagAjto4" runat="server" ToolTip="Ajtó4 magasság" AutoPostBack="true" OnTextChanged="edMagassagAjto_TextChanged"/>
             </div>
 
             <div class="col-md-2">
@@ -165,19 +165,19 @@
             </div>
 
             <div class="col-md-2">
-                <asp:TextBox ID="edSzelessegAjto1" runat="server" ToolTip="Ajtó1 szélesség" OnTextChanged="edSzelessegAjto_TextChanged"/>
+                <asp:TextBox ID="edSzelessegAjto1" runat="server" ToolTip="Ajtó1 szélesség" AutoPostBack="true" OnTextChanged="edSzelessegAjto_TextChanged"/>
             </div>
 
             <div class="col-md-2">
-                <asp:TextBox ID="edSzelessegAjto2" runat="server" ToolTip="Ajtó2 szélesség" OnTextChanged="edSzelessegAjto_TextChanged"/>
+                <asp:TextBox ID="edSzelessegAjto2" runat="server" ToolTip="Ajtó2 szélesség" AutoPostBack="true" OnTextChanged="edSzelessegAjto_TextChanged"/>
             </div>
 
             <div class="col-md-2">
-                <asp:TextBox ID="edSzelessegAjto3" runat="server" ToolTip="Ajtó3 szélesség" OnTextChanged="edSzelessegAjto_TextChanged"/>
+                <asp:TextBox ID="edSzelessegAjto3" runat="server" ToolTip="Ajtó3 szélesség" AutoPostBack="true" OnTextChanged="edSzelessegAjto_TextChanged"/>
             </div>
 
             <div class="col-md-2">
-                <asp:TextBox ID="edSzelessegAjto4" runat="server" ToolTip="Ajtó4 szélesség" OnTextChanged="edSzelessegAjto_TextChanged"/>
+                <asp:TextBox ID="edSzelessegAjto4" runat="server" ToolTip="Ajtó4 szélesség" AutoPostBack="true" OnTextChanged="edSzelessegAjto_TextChanged"/>
             </div>
 
             <div class="col-md-2">

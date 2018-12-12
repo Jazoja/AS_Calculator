@@ -8,11 +8,14 @@ using System.Web.UI.WebControls;
 
 namespace CalculatorWF
 {
+    
     public partial class SiteMaster : MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
+
+        
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -48,6 +51,7 @@ namespace CalculatorWF
 
         protected void master_Page_PreLoad(object sender, EventArgs e)
         {
+           
             if (!IsPostBack)
             {
                 // Set Anti-XSRF token
