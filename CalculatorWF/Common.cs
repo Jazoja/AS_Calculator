@@ -170,12 +170,13 @@ namespace CalculatorWF
 
     public struct struAjto
     {
-        public short nSzelesseg;
-        public short nMagassag;
+        public int nSzelesseg;
+        public int nMagassag;
         public string sBetet;
         public string sVasalat;
         public int nOsztokSzama;
-        public string sOpciok;
+        public string sOpciokToloAjto;
+        public string sOpciokNyiloAjto;
     }
 
     public struct struRendszer
@@ -188,6 +189,8 @@ namespace CalculatorWF
         public int nNyilasMagassag;
         public int nNyilasSzelesseg;
         public int nFalVastagsag;
+
+        public string sNyitasIrany;
 
         public int nSinekSzama;
         public int nSinHossz;
@@ -210,6 +213,8 @@ namespace CalculatorWF
             this.nSinekSzama = 0;
             this.nSinHossz = 0;
             this.nAjtokSzama = 0;
+
+            this.sNyitasIrany = "";
 
             this.rAjto = new struAjto[5];
         }
@@ -234,6 +239,8 @@ namespace CalculatorWF
             this.nSinekSzama = rRendszer.nSinekSzama;
             this.nSinHossz = rRendszer.nSinHossz;
             this.nAjtokSzama = rRendszer.nAjtokSzama;
+
+            this.sNyitasIrany = rRendszer.sNyitasIrany;
 
             this.rAjto = new struAjto[rRendszer.rAjto.Length];
             rRendszer.rAjto.CopyTo(this.rAjto,0);
