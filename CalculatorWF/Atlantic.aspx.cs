@@ -60,7 +60,7 @@ namespace CalculatorWF
                 lblOpciokNyiloAjto.Visible = divOpciokNyiloAjto.Visible = divOpciokNyiloAjto1.Visible = divOpciokNyiloAjto2.Visible = divOpciokNyiloAjto3.Visible = divOpciokNyiloAjto4.Visible = false;
                 lblOpciokToloAjto.Visible = divOpciokToloAjto.Visible = divOpciokToloAjto1.Visible = divOpciokToloAjto2.Visible = divOpciokToloAjto3.Visible = divOpciokToloAjto4.Visible = false;
 
-                if (rSV.rRendszer.sRendszerTipus == "slide_ext")
+                if (rSV.rRendszer.sRendszerTipus == "sliding_door_external")
                 {
                     divBeepitesiMod.Visible = true;
                     divSinekSzama.Visible = true;
@@ -71,11 +71,8 @@ namespace CalculatorWF
                     divAjtoSzelesseg.Visible = true;
                     divAjtoBetet.Visible = true;
                     divVasalat.Visible = true;
-                    divOsztokSzamaAjto.Visible = true;
-                    divOpciokToloAjto.Visible = true;
-
-                    lblOsztokSzamaAjto.Visible = true;
-                    lblOpciokToloAjto.Visible = true;
+                    lblOsztokSzamaAjto.Visible = divOsztokSzamaAjto.Visible = true;
+                    lblOpciokToloAjto.Visible = divOpciokToloAjto.Visible = true;
 
                     divOpciokToloAjto1.Visible = divOsztokSzamaAjto1.Visible = divVasalat1.Visible = divAjtoBetet1.Visible = divSzelessegAjto1.Visible = divMagassagAjto1.Visible = divAjto1.Visible = rSV.rRendszer.nAjtokSzama >= 1;
                     divOpciokToloAjto2.Visible = divOsztokSzamaAjto2.Visible = divVasalat2.Visible = divAjtoBetet2.Visible = divSzelessegAjto2.Visible = divMagassagAjto2.Visible = divAjto2.Visible = rSV.rRendszer.nAjtokSzama >= 2;
@@ -84,7 +81,7 @@ namespace CalculatorWF
                    
                 }
 
-                if (rSV.rRendszer.sRendszerTipus == "slide_int")
+                if (rSV.rRendszer.sRendszerTipus == "sliding_door_in_wall")
                 {
                     divAjtokSzama.Visible = true;
                     divAjtoMeret.Visible = true;
@@ -92,8 +89,8 @@ namespace CalculatorWF
                     divAjtoSzelesseg.Visible = true;
                     divAjtoBetet.Visible = true;
 
-                    divOsztokSzamaAjto.Visible = true;
-                    divOpciokToloAjto.Visible = true;
+                    lblOsztokSzamaAjto.Visible = divOsztokSzamaAjto.Visible = true;
+                    lblOpciokToloAjto.Visible = divOpciokToloAjto.Visible = true;
 
                     divOpciokToloAjto1.Visible = divOsztokSzamaAjto1.Visible = divAjtoBetet1.Visible = divSzelessegAjto1.Visible = divMagassagAjto1.Visible = divAjto1.Visible = rSV.rRendszer.nAjtokSzama >= 1;
                     divOpciokToloAjto2.Visible = divOsztokSzamaAjto2.Visible = divAjtoBetet2.Visible = divSzelessegAjto2.Visible = divMagassagAjto2.Visible = divAjto2.Visible = rSV.rRendszer.nAjtokSzama >= 2;
@@ -220,18 +217,18 @@ namespace CalculatorWF
                 NameValueCollection nvcRendszerTipusok = new NameValueCollection();
 
                 nvcRendszerTipusok[""] = "";
-                nvcRendszerTipusok["slide_ext"] = "Tolóajtó";
-                nvcRendszerTipusok["slide_int"] = "Falban futó tolóajtó";
-                nvcRendszerTipusok["swing_door_normal"] = "Nyíló ajtó - Csak ajtó normál szárny";
-                nvcRendszerTipusok["swing_door_fix"] = "Nyíló ajtó - Csak ajtó fix szárny";
+                nvcRendszerTipusok["sliding_door_external"] = "Tolóajtó";
+                nvcRendszerTipusok["sliding_door_in_wall"] = "Falban futó tolóajtó";
+                nvcRendszerTipusok["swing_door_only_normal"] = "Nyíló ajtó - Csak ajtó normál szárny";
+                nvcRendszerTipusok["swing_door_only_fix"] = "Nyíló ajtó - Csak ajtó fix szárny";
                 nvcRendszerTipusok["screen"] = "Screen";
-                nvcRendszerTipusok["swing_slim"] = "Nyíló ajtó aluminium tok 100-125";
-                nvcRendszerTipusok["swing_thin"] = "Nyíló ajtó aluminium tok 125 -";
+                nvcRendszerTipusok["swing_door_with_slim_alu_case"] = "Nyíló ajtó aluminium tok 100-125";
+                nvcRendszerTipusok["swing_door_with_thin_alu_case"] = "Nyíló ajtó aluminium tok 125 -";
 
-                foreach (string sRendszerTipus in nvcRendszerTipusok)
+                foreach (string sRendszerTipusID in nvcRendszerTipusok)
                 {
-                    string sRendszerTipusNev = nvcRendszerTipusok[sRendszerTipus];
-                    ListItem liRendszerTipus = new ListItem(sRendszerTipusNev, sRendszerTipus);
+                    string sRendszerTipusNev = nvcRendszerTipusok[sRendszerTipusID];
+                    ListItem liRendszerTipus = new ListItem(sRendszerTipusNev, sRendszerTipusID);
                     ddlRendszerTipus.Items.Add(liRendszerTipus);
                 }
                 ddlRendszerTipus.SelectedValue = rSV.rRendszer.sRendszerTipus;
@@ -257,12 +254,19 @@ namespace CalculatorWF
                 }
                 ddlAjtokSzama.SelectedValue = rSV.rRendszer.nAjtokSzama.ToString();
 
-                string[] sNyitasIranyok = { "", "DIN jobb", "DIN bal" };
-                foreach(string sNyitasIrany in sNyitasIranyok)
+                NameValueCollection nvcNyitasIranyok = new NameValueCollection();
+
+                nvcNyitasIranyok[""] = "";
+                nvcNyitasIranyok["din_right"] = "DIN jobb";
+                nvcNyitasIranyok["din_left"] = "DIN bal";
+                
+                foreach(string sNyitasIranyID in nvcNyitasIranyok)
                 {
-                    ddlNyitasIrany.Items.Add(sNyitasIrany);
+                    string sNyitasIranyNev = nvcNyitasIranyok[sNyitasIranyID];
+                    ListItem liNyitasIrany = new ListItem(sNyitasIranyNev, sNyitasIranyID);
+                    ddlNyitasIrany.Items.Add(liNyitasIrany);
                 }
-                ddlNyitasIrany.SelectedValue = rSV.rRendszer.sNyitasIrany;
+                ddlNyitasIrany.SelectedValue = rSV.rRendszer.sNyitasIranyID;
 
                 string[] sBetetTipusok = { "", "B5 D3s", "B5 Es", "B6 P7s", "B6 P1s", "B5 EsMILL", "B5 D3sMILL", "B6 P1Ss", "B6 STS BRs" };
                 foreach (string sBetetTipus in sBetetTipusok)
@@ -272,23 +276,30 @@ namespace CalculatorWF
                     ddlAjtoBetet3.Items.Add(sBetetTipus);
                     ddlAjtoBetet4.Items.Add(sBetetTipus);
                 }
-                ddlAjtoBetet1.SelectedValue = rSV.rRendszer.rAjto[1].sBetet;
-                ddlAjtoBetet2.SelectedValue = rSV.rRendszer.rAjto[2].sBetet;
-                ddlAjtoBetet3.SelectedValue = rSV.rRendszer.rAjto[3].sBetet;
-                ddlAjtoBetet4.SelectedValue = rSV.rRendszer.rAjto[4].sBetet;
+                ddlAjtoBetet1.SelectedValue = rSV.rRendszer.rAjto[1].sBetetID;
+                ddlAjtoBetet2.SelectedValue = rSV.rRendszer.rAjto[2].sBetetID;
+                ddlAjtoBetet3.SelectedValue = rSV.rRendszer.rAjto[3].sBetetID;
+                ddlAjtoBetet4.SelectedValue = rSV.rRendszer.rAjto[4].sBetetID;
 
-                string[] sVasalatok = { "", "Fékező nélkül", "1 fékezővel", "2 fékezővel" };
-                foreach (string sVasalat in sVasalatok)
+                NameValueCollection nvcVasalatok = new NameValueCollection() { { "", "" }, {"0", "Fékező nélkül" }, { "1", "1 fékezővel" }, { "2", "2 fékezővel" } };
+
+                foreach (string sVasalatID in nvcVasalatok)
                 {
-                    ddlVasalat1.Items.Add(sVasalat);
-                    ddlVasalat2.Items.Add(sVasalat);
-                    ddlVasalat3.Items.Add(sVasalat);
-                    ddlVasalat4.Items.Add(sVasalat);
+                    string sVasalatNev = nvcVasalatok[sVasalatID];
+
+                    ListItem liVasalat = new ListItem(sVasalatNev, sVasalatID);
+                    ddlVasalat1.Items.Add(liVasalat);
+                    liVasalat = new ListItem(sVasalatNev, sVasalatID);
+                    ddlVasalat2.Items.Add(liVasalat);
+                    liVasalat = new ListItem(sVasalatNev, sVasalatID);
+                    ddlVasalat3.Items.Add(liVasalat);
+                    liVasalat = new ListItem(sVasalatNev, sVasalatID);
+                    ddlVasalat4.Items.Add(liVasalat);
                 }
-                ddlVasalat1.SelectedValue = rSV.rRendszer.rAjto[1].sVasalat;
-                ddlVasalat2.SelectedValue = rSV.rRendszer.rAjto[2].sVasalat;
-                ddlVasalat3.SelectedValue = rSV.rRendszer.rAjto[3].sVasalat;
-                ddlVasalat4.SelectedValue = rSV.rRendszer.rAjto[4].sVasalat;
+                ddlVasalat1.SelectedValue = rSV.rRendszer.rAjto[1].sVasalatID;
+                ddlVasalat2.SelectedValue = rSV.rRendszer.rAjto[2].sVasalatID;
+                ddlVasalat3.SelectedValue = rSV.rRendszer.rAjto[3].sVasalatID;
+                ddlVasalat4.SelectedValue = rSV.rRendszer.rAjto[4].sVasalatID;
 
                 int nMaxOsztokSzama = 4;
                 for (int nOsztokSzama = 0; nOsztokSzama <= nMaxOsztokSzama; nOsztokSzama++)
@@ -304,31 +315,59 @@ namespace CalculatorWF
                 ddlOsztokSzamaAjto3.SelectedValue = rSV.rRendszer.rAjto[3].nOsztokSzama.ToString();
                 ddlOsztokSzamaAjto4.SelectedValue = rSV.rRendszer.rAjto[4].nOsztokSzama.ToString();
 
-                string[] sOpciokToloAjto = { "", "Egyoldalas húzó jobb oldalon", "Egyoldalas húzó bal oldalon", "Kétoldalas húzó jobb oldalon", "Kétoldalas húzó bal oldalon", "Tolóajtó zár jobb oldalon", "Tolóajtó zár bal oldalon" };
-                foreach (string sOpcio in sOpciokToloAjto)
-                {
-                    ddlOpciokToloAjto1.Items.Add(sOpcio);
-                    ddlOpciokToloAjto2.Items.Add(sOpcio);
-                    ddlOpciokToloAjto3.Items.Add(sOpcio);
-                    ddlOpciokToloAjto4.Items.Add(sOpcio);
-                }
-                ddlOpciokToloAjto1.SelectedValue = rSV.rRendszer.rAjto[1].sOpciokToloAjto;
-                ddlOpciokToloAjto2.SelectedValue = rSV.rRendszer.rAjto[2].sOpciokToloAjto;
-                ddlOpciokToloAjto3.SelectedValue = rSV.rRendszer.rAjto[3].sOpciokToloAjto;
-                ddlOpciokToloAjto4.SelectedValue = rSV.rRendszer.rAjto[4].sOpciokToloAjto;
+                NameValueCollection nvcOpciokToloAjto = new NameValueCollection();
+                nvcOpciokToloAjto[""] = "";
+                nvcOpciokToloAjto["one_side_handle_on_right"] = "Egyoldalas húzó jobb oldalon";
+                nvcOpciokToloAjto["one_side_handle_on_left"] = "Egyoldalas húzó bal oldalon";
+                nvcOpciokToloAjto["two_side_handle_on_right"] = "Kétoldalas húzó jobb oldalon";
+                nvcOpciokToloAjto["two_side_handle_on_left"] = "Kétoldalas húzó bal oldalon";
+                nvcOpciokToloAjto["slide_door_lock_on_right"] = "Tolóajtó zár jobb oldalon";
+                nvcOpciokToloAjto["slide_door_lock_on_left"] = "Tolóajtó zár bal oldalon";
 
-                string[] sOpciokNyiloAjto = { "", "Kilincs zár nélkül", "Kilincs kulcsos zárral", "Kilincs WC zárral" };
-                foreach (string sOpcio in sOpciokNyiloAjto)
+                foreach (string sOpcioID in nvcOpciokToloAjto)
                 {
-                    ddlOpciokNyiloAjto1.Items.Add(sOpcio);
-                    ddlOpciokNyiloAjto2.Items.Add(sOpcio);
-                    ddlOpciokNyiloAjto3.Items.Add(sOpcio);
-                    ddlOpciokNyiloAjto4.Items.Add(sOpcio);
+                    string sOpcioNev = nvcOpciokToloAjto[sOpcioID];
+
+                    ListItem liOpcio = new ListItem(sOpcioNev, sOpcioID);
+                    ddlOpciokToloAjto1.Items.Add(liOpcio);
+                    liOpcio = new ListItem(sOpcioNev, sOpcioID);
+                    ddlOpciokToloAjto2.Items.Add(liOpcio);
+                    liOpcio = new ListItem(sOpcioNev, sOpcioID);
+                    ddlOpciokToloAjto3.Items.Add(liOpcio);
+                    liOpcio = new ListItem(sOpcioNev, sOpcioID);
+                    ddlOpciokToloAjto4.Items.Add(liOpcio);
+
                 }
-                ddlOpciokNyiloAjto1.SelectedValue = rSV.rRendszer.rAjto[1].sOpciokNyiloAjto;
-                ddlOpciokNyiloAjto2.SelectedValue = rSV.rRendszer.rAjto[2].sOpciokNyiloAjto;
-                ddlOpciokNyiloAjto3.SelectedValue = rSV.rRendszer.rAjto[3].sOpciokNyiloAjto;
-                ddlOpciokNyiloAjto4.SelectedValue = rSV.rRendszer.rAjto[4].sOpciokNyiloAjto;
+                ddlOpciokToloAjto1.SelectedValue = rSV.rRendszer.rAjto[1].sOpciokToloAjtoID;
+                ddlOpciokToloAjto2.SelectedValue = rSV.rRendszer.rAjto[2].sOpciokToloAjtoID;
+                ddlOpciokToloAjto3.SelectedValue = rSV.rRendszer.rAjto[3].sOpciokToloAjtoID;
+                ddlOpciokToloAjto4.SelectedValue = rSV.rRendszer.rAjto[4].sOpciokToloAjtoID;
+
+                NameValueCollection nvcOpciokNyiloAjto = new NameValueCollection();
+                nvcOpciokNyiloAjto[""] = "";
+                nvcOpciokNyiloAjto["handle_without_lock"] = "Kilincs zár nélkül";
+                nvcOpciokNyiloAjto["handle_with_key_lock"] = "Kilincs kulcsos zárral";
+                nvcOpciokNyiloAjto["handle_with_toilet_lock"] = "Kilincs WC zárral";
+
+                foreach (string sOpcioID in nvcOpciokNyiloAjto)
+                {
+                    string sOpcioNev = nvcOpciokNyiloAjto[sOpcioID];
+
+                    ListItem liOpcio = new ListItem(sOpcioNev, sOpcioID);
+                    ddlOpciokNyiloAjto1.Items.Add(liOpcio);
+                    liOpcio = new ListItem(sOpcioNev, sOpcioID);
+                    ddlOpciokNyiloAjto2.Items.Add(liOpcio);
+                    liOpcio = new ListItem(sOpcioNev, sOpcioID);
+                    ddlOpciokNyiloAjto3.Items.Add(liOpcio);
+                    liOpcio = new ListItem(sOpcioNev, sOpcioID);
+                    ddlOpciokNyiloAjto4.Items.Add(liOpcio);
+                     
+                }
+                
+                ddlOpciokNyiloAjto1.SelectedValue = rSV.rRendszer.rAjto[1].sOpciokNyiloAjtoID;
+                ddlOpciokNyiloAjto2.SelectedValue = rSV.rRendszer.rAjto[2].sOpciokNyiloAjtoID;
+                ddlOpciokNyiloAjto3.SelectedValue = rSV.rRendszer.rAjto[3].sOpciokNyiloAjtoID;
+                ddlOpciokNyiloAjto4.SelectedValue = rSV.rRendszer.rAjto[4].sOpciokNyiloAjtoID;
 
                 edSinHossza.Text = rSV.rRendszer.nSinHossz.ToString();
                 
@@ -390,7 +429,7 @@ namespace CalculatorWF
 
         protected void ddlNyitasIrany_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rSV.rRendszer.sNyitasIrany = ddlNyitasIrany.SelectedValue;
+            rSV.rRendszer.sNyitasIranyID = ddlNyitasIrany.SelectedValue;
         }
 
         protected void edNyilasMagassag_TextChanged(object sender, EventArgs e)
@@ -426,18 +465,18 @@ namespace CalculatorWF
 
         protected void ddlAjtoBetet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rSV.rRendszer.rAjto[1].sBetet = ddlAjtoBetet1.SelectedValue;
-            rSV.rRendszer.rAjto[2].sBetet = ddlAjtoBetet2.SelectedValue;
-            rSV.rRendszer.rAjto[3].sBetet = ddlAjtoBetet3.SelectedValue;
-            rSV.rRendszer.rAjto[4].sBetet = ddlAjtoBetet4.SelectedValue;
+            rSV.rRendszer.rAjto[1].sBetetID = ddlAjtoBetet1.SelectedValue;
+            rSV.rRendszer.rAjto[2].sBetetID = ddlAjtoBetet2.SelectedValue;
+            rSV.rRendszer.rAjto[3].sBetetID = ddlAjtoBetet3.SelectedValue;
+            rSV.rRendszer.rAjto[4].sBetetID = ddlAjtoBetet4.SelectedValue;
         }
 
         protected void ddlVasalat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rSV.rRendszer.rAjto[1].sVasalat = ddlVasalat1.SelectedValue;
-            rSV.rRendszer.rAjto[2].sVasalat = ddlVasalat2.SelectedValue;
-            rSV.rRendszer.rAjto[3].sVasalat = ddlVasalat3.SelectedValue;
-            rSV.rRendszer.rAjto[4].sVasalat = ddlVasalat4.SelectedValue;
+            rSV.rRendszer.rAjto[1].sVasalatID = ddlVasalat1.SelectedValue;
+            rSV.rRendszer.rAjto[2].sVasalatID = ddlVasalat2.SelectedValue;
+            rSV.rRendszer.rAjto[3].sVasalatID = ddlVasalat3.SelectedValue;
+            rSV.rRendszer.rAjto[4].sVasalatID = ddlVasalat4.SelectedValue;
         }
 
         protected void ddlOsztokSzamaAjto_SelectedIndexChanged(object sender, EventArgs e)
@@ -450,18 +489,18 @@ namespace CalculatorWF
 
         protected void ddlOpciokToloAjto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rSV.rRendszer.rAjto[1].sOpciokToloAjto = ddlOpciokToloAjto1.SelectedValue;
-            rSV.rRendszer.rAjto[2].sOpciokToloAjto = ddlOpciokToloAjto2.SelectedValue;
-            rSV.rRendszer.rAjto[3].sOpciokToloAjto = ddlOpciokToloAjto3.SelectedValue;
-            rSV.rRendszer.rAjto[4].sOpciokToloAjto = ddlOpciokToloAjto4.SelectedValue;
+            rSV.rRendszer.rAjto[1].sOpciokToloAjtoID = ddlOpciokToloAjto1.SelectedValue;
+            rSV.rRendszer.rAjto[2].sOpciokToloAjtoID = ddlOpciokToloAjto2.SelectedValue;
+            rSV.rRendszer.rAjto[3].sOpciokToloAjtoID = ddlOpciokToloAjto3.SelectedValue;
+            rSV.rRendszer.rAjto[4].sOpciokToloAjtoID = ddlOpciokToloAjto4.SelectedValue;
         }
 
         protected void ddlOpciokNyiloAjto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rSV.rRendszer.rAjto[1].sOpciokNyiloAjto = ddlOpciokNyiloAjto1.SelectedValue;
-            rSV.rRendszer.rAjto[2].sOpciokNyiloAjto = ddlOpciokNyiloAjto2.SelectedValue;
-            rSV.rRendszer.rAjto[3].sOpciokNyiloAjto = ddlOpciokNyiloAjto3.SelectedValue;
-            rSV.rRendszer.rAjto[4].sOpciokNyiloAjto = ddlOpciokNyiloAjto4.SelectedValue;
+            rSV.rRendszer.rAjto[1].sOpciokNyiloAjtoID = ddlOpciokNyiloAjto1.SelectedValue;
+            rSV.rRendszer.rAjto[2].sOpciokNyiloAjtoID = ddlOpciokNyiloAjto2.SelectedValue;
+            rSV.rRendszer.rAjto[3].sOpciokNyiloAjtoID = ddlOpciokNyiloAjto3.SelectedValue;
+            rSV.rRendszer.rAjto[4].sOpciokNyiloAjtoID = ddlOpciokNyiloAjto4.SelectedValue;
         }
 
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Data.SqlClient;
 using System.Xml.Serialization;
 
 namespace CalculatorWF
@@ -164,19 +166,17 @@ namespace CalculatorWF
 
         [XmlIgnoreAttribute]
         public struTetel[] rBontas;
-
-
     }
 
     public struct struAjto
     {
         public int nSzelesseg;
         public int nMagassag;
-        public string sBetet;
-        public string sVasalat;
+        public string sBetetID;
+        public string sVasalatID;
         public int nOsztokSzama;
-        public string sOpciokToloAjto;
-        public string sOpciokNyiloAjto;
+        public string sOpciokToloAjtoID;
+        public string sOpciokNyiloAjtoID;
     }
 
     public struct struRendszer
@@ -190,7 +190,7 @@ namespace CalculatorWF
         public int nNyilasSzelesseg;
         public int nFalVastagsag;
 
-        public string sNyitasIrany;
+        public string sNyitasIranyID;
 
         public int nSinekSzama;
         public int nSinHossz;
@@ -214,7 +214,7 @@ namespace CalculatorWF
             this.nSinHossz = 0;
             this.nAjtokSzama = 0;
 
-            this.sNyitasIrany = "";
+            this.sNyitasIranyID = "";
 
             this.rAjto = new struAjto[5];
         }
@@ -240,7 +240,7 @@ namespace CalculatorWF
             this.nSinHossz = rRendszer.nSinHossz;
             this.nAjtokSzama = rRendszer.nAjtokSzama;
 
-            this.sNyitasIrany = rRendszer.sNyitasIrany;
+            this.sNyitasIranyID = rRendszer.sNyitasIranyID;
 
             this.rAjto = new struAjto[rRendszer.rAjto.Length];
             rRendszer.rAjto.CopyTo(this.rAjto,0);
@@ -280,10 +280,65 @@ namespace CalculatorWF
 
     public static class Common
     {
-        public static void Calculate()
-        {
+        public static string sWDConnection = "user id=Calculator;" +
+                       @"password=Calc;server=AS-WINDIRECT\WINDIRECT;" +
+                       "Trusted_Connection=no;" +
+                       "database=WD_eles; " +
+                       "connection timeout=30";
 
+        public static string getWDcikk(ref NameValueCollection nvcCikkWD)
+        {
+            bool bCikkszamFound = false;
+            string sResult = "";
+
+            string sCikkszam = nvcCikkWD["pridentifier"];
+
+            SqlConnection myConnection = new SqlConnection(sWDConnection);
+
+            try
+            {
+                myConnection.Open();
+            }
+            catch (Exception ex)
+            {
+                sResult += " Database connection error: " + ex.ToString() + ";";
+            }
+
+            try
+            {
+                SqlDataReader myReader = null;
+                SqlCommand myCommand = new SqlCommand("SELECT top (10) product.PRIDENTIFIER, product.PRODUCTNAME, product.PRODUCTGROUPID, PRODUCTGROUPNAME, product.P_CUSTOMCODE FROM [WD_eles].[dbo].[PRODUCT] join [WD_eles].[dbo].[PRODUCTGROUP] on PRODUCT.PRODUCTGROUPID = PRODUCTGROUP.PRODUCTGROUPID where pridentifier ='" + sCikkszam + "'", myConnection);
+
+                myReader = myCommand.ExecuteReader();
+                if (myReader.Read())
+                {
+                    bCikkszamFound = true;
+                    foreach(string sFieldID in myReader)
+                    {
+                        nvcCikkWD[sFieldID] = myReader[sFieldID].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                sResult += " Database query error: " + ex.ToString() + ";";
+            }
+
+            try
+            {
+                myConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                sResult += " Database close error: " + ex.ToString() + ";";
+            }
+
+            if(!bCikkszamFound)
+                sResult += " Product ID not found in database: " + sCikkszam + ";";
+
+            return sResult;
         }
+
     }
 }
 
