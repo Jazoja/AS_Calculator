@@ -35,6 +35,13 @@ namespace CalculatorWF
             }
             else
             {
+                edPartnerCode.Text = rSV.rFej.sPartnerKod;
+                
+                ddlPartner.Items.Add("");
+                ddlPartner.Items.Add("Alu-Style");
+                ddlPartner.Items.Add("InForma");
+                ddlPartner.Items.Add("SpeedMaster");
+
                 divRendszerTipus.Visible = true;
 
                 divBeepitesiMod.Visible = false;
@@ -435,11 +442,13 @@ namespace CalculatorWF
         protected void edNyilasMagassag_TextChanged(object sender, EventArgs e)
         {
             rSV.rRendszer.nNyilasMagassag = Int32.Parse(edNyilasMagassag.Text);
+            rSV.rRendszer.rAjto[1].nMagassag = rSV.rRendszer.nNyilasMagassag - 45;
         }
 
         protected void edNyilasSzelesseg_TextChanged(object sender, EventArgs e)
         {
             rSV.rRendszer.nNyilasSzelesseg = Int32.Parse(edNyilasSzelesseg.Text);
+            rSV.rRendszer.rAjto[1].nSzelesseg = rSV.rRendszer.nNyilasSzelesseg - 78;
         }
 
         protected void edFalvastagsag_TextChanged(object sender, EventArgs e)
@@ -453,6 +462,7 @@ namespace CalculatorWF
             Int32.TryParse(edMagassagAjto2.Text, out rSV.rRendszer.rAjto[2].nMagassag);
             Int32.TryParse(edMagassagAjto3.Text, out rSV.rRendszer.rAjto[3].nMagassag);
             Int32.TryParse(edMagassagAjto4.Text, out rSV.rRendszer.rAjto[4].nMagassag);
+
         }
 
         protected void edSzelessegAjto_TextChanged(object sender, EventArgs e)
@@ -507,6 +517,21 @@ namespace CalculatorWF
         protected void edSinHossza_TextChanged(object sender, EventArgs e)
         {
             Int32.TryParse(edSinHossza.Text, out rSV.rRendszer.nSinHossz);
+        }
+
+        protected void ddlPartnerKod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlPartner_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void edPartnerCode_TextChanged(object sender, EventArgs e)
+        {
+            rSV.rFej.sPartnerKod = edPartnerCode.Text;
         }
 
 

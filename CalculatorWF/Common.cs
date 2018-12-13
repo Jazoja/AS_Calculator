@@ -139,6 +139,8 @@ namespace CalculatorWF
         [XmlIgnoreAttribute]
         public int nRaktarCikktip;
         [XmlIgnoreAttribute]
+        public int nHosszusag;
+        [XmlIgnoreAttribute]
         public int nMagassag;
         [XmlIgnoreAttribute]
         public int nSzelesseg;
@@ -337,6 +339,141 @@ namespace CalculatorWF
                 sResult += " Product ID not found in database: " + sCikkszam + ";";
 
             return sResult;
+        }
+
+        public static string AddTetel(struTetel rTetel, ref struTetel[] rBontas)
+        {
+            string sResult ="";
+
+            Array.Resize(ref rBontas, rBontas.Length + 1);
+            rBontas[rBontas.Length - 1] = rTetel;
+
+            return sResult;
+        }
+
+        public static string calculate(ref struSiteVariables rSV)
+        {
+            string sResult = "";
+
+            struRendszer rRendszer = rSV.rRendszer;
+
+            if (rRendszer.sRendszerTipus == "sliding_door_external")
+            {
+                if (rSV.rRendszer.sBeepitesiMod == "P1")
+                { 
+                    struTetel rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "110.160.00";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * rRendszer.nSinekSzama;
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                    rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "110.110.00";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * 2;
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                    rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "110.112.00";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * (rRendszer.nSinekSzama - 1);
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                }
+
+                if (rSV.rRendszer.sBeepitesiMod == "P2")
+                {
+                    struTetel rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "110.160.00";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * rRendszer.nSinekSzama;
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                    rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "110.161.00";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * 2;
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                    rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "6116";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * rRendszer.nSinekSzama;
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                }
+
+                if (rSV.rRendszer.sBeepitesiMod == "F1")
+                {
+                    struTetel rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "110.160.00";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000;
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                    rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "110.100.00";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000;
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                    rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "110.110.00";
+                    rTetel.dMennyiseg = rRendszer.nSinHossz / 1000;
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                }
+
+                if (rSV.rRendszer.sBeepitesiMod.StartsWith("P")) //sín végzáró elem
+                {
+                    struTetel rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "140.180.00";
+                    rTetel.dMennyiseg = rRendszer.nSinekSzama *2;
+                    AddTetel(rTetel, ref rSV.rBontas);
+                }
+
+                int nFekezok = 0;
+                for(int nAjto = 1; nAjto <= rSV.rRendszer.nAjtokSzama; nAjto++)
+                {
+                    nFekezok += Int16.Parse(rSV.rRendszer.rAjto[nAjto].sVasalatID);
+                }
+                int nFekezosVasalat = nFekezok;
+                int nFekezoNelkuliVasalat = rSV.rRendszer.nAjtokSzama * 2 - nFekezosVasalat;
+
+                if (nFekezosVasalat > 0)
+                {
+                    struTetel rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "430.101.00";
+                    rTetel.dMennyiseg = nFekezosVasalat;
+                    AddTetel(rTetel, ref rSV.rBontas);
+                }
+
+                if (nFekezoNelkuliVasalat > 0)
+                {
+                    struTetel rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "430.111.00";
+                    rTetel.dMennyiseg = nFekezoNelkuliVasalat;
+                    AddTetel(rTetel, ref rSV.rBontas);
+                }
+
+                if (rSV.rRendszer.sBeepitesiMod.StartsWith("P")) //sín rögzítő csavar szett
+                {
+                    struTetel rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "650.020.11";
+                    rTetel.dMennyiseg = rRendszer.nSinekSzama * Math.Round((decimal)(2 + (rRendszer.nSinHossz / 1000) * 3));
+                    AddTetel(rTetel, ref rSV.rBontas);
+                }
+
+                if (rSV.rRendszer.sBeepitesiMod == "F1")
+                {
+                    struTetel rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "150.000.11";
+                    rTetel.dMennyiseg = rRendszer.nSinekSzama * Math.Round((decimal)(2 + (rRendszer.nSinHossz / 1000) * 3));
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                    rTetel = new struTetel();
+                    rTetel.sCikkszamKalk = "150.010.11";
+                    rTetel.dMennyiseg = rRendszer.nSinekSzama * Math.Round((decimal)(2 + (rRendszer.nSinHossz / 1000) * 3));
+                    AddTetel(rTetel, ref rSV.rBontas);
+
+                }
+            }
+
+
+            return sResult;
+
         }
 
     }

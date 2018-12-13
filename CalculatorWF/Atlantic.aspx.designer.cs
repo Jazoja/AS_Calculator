@@ -13,6 +13,42 @@ namespace CalculatorWF {
     public partial class Atlantic {
         
         /// <summary>
+        /// lblWDPartnerCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWDPartnerCode;
+        
+        /// <summary>
+        /// edPartnerCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edPartnerCode;
+        
+        /// <summary>
+        /// lblPartner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPartner;
+        
+        /// <summary>
+        /// ddlPartner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPartner;
+        
+        /// <summary>
         /// divRendszerTipus control.
         /// </summary>
         /// <remarks>

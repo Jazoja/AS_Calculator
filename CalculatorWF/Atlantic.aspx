@@ -6,12 +6,47 @@
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1><%: Title %>.</h1>
+                <h1><%: Title %></h1>
                 <h2>XML generáló oldal</h2>
             </hgroup>
-            <p>
-                Lorem ipsum
-            </p>
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <asp:Label ID="lblWDPartnerCode" runat="server" Text="WinDirect Partnerkód" />
+                        <br />
+                        <asp:TextBox ID="edPartnerCode" runat="server" AutoPostBack="true" OnTextChanged="edPartnerCode_TextChanged"/>
+                    </div>
+
+                    <div class="col-md-4">
+                        <asp:Label ID="lblPartner" runat="server" Text="Partner" />
+                        <br />
+                        <asp:DropDownList ID="ddlPartner" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPartner_SelectedIndexChanged"/>
+                    </div>
+
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 </asp:Content>
