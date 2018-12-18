@@ -26,6 +26,9 @@ namespace CalculatorWF
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string serverMapPath = Server.MapPath(".");
+            Common.Init(serverMapPath);
+            
             struSiteVariables rSV = new struSiteVariables("default");
             Vars.SiteVars = rSV;
         }

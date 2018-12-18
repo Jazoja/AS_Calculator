@@ -288,7 +288,7 @@ namespace CalculatorWF
                 ddlAjtoBetet3.SelectedValue = rSV.rRendszer.rAjto[3].sBetetID;
                 ddlAjtoBetet4.SelectedValue = rSV.rRendszer.rAjto[4].sBetetID;
 
-                NameValueCollection nvcVasalatok = new NameValueCollection() { { "", "" }, {"0", "Fékező nélkül" }, { "1", "1 fékezővel" }, { "2", "2 fékezővel" } };
+                NameValueCollection nvcVasalatok = new NameValueCollection() { {"0", "Fékező nélkül" }, { "1", "1 fékezővel" }, { "2", "2 fékezővel" } };
 
                 foreach (string sVasalatID in nvcVasalatok)
                 {
@@ -391,7 +391,12 @@ namespace CalculatorWF
                 edNyilasMagassag.Text = rSV.rRendszer.nNyilasMagassag.ToString();
                 edNyilasSzelesseg.Text = rSV.rRendszer.nNyilasSzelesseg.ToString();
                 edFalvastagsag.Text = rSV.rRendszer.nFalVastagsag.ToString();
+
+                edAr.Text = rSV.rRendszer.dAr.ToString();
             }
+
+
+            
 
         }
 
@@ -532,6 +537,21 @@ namespace CalculatorWF
         protected void edPartnerCode_TextChanged(object sender, EventArgs e)
         {
             rSV.rFej.sPartnerKod = edPartnerCode.Text;
+        }
+
+        protected void edAr_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnCalculate_Click(object sender, EventArgs e)
+        {
+            string sResult = Common.calculate(ref rSV);
+        }
+
+        protected void btnXML_Click(object sender, EventArgs e)
+        {
+            Common.SaveToWD(rSV);
         }
 
 

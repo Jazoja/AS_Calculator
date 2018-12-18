@@ -76,6 +76,42 @@ namespace CalculatorWF {
         protected global::System.Web.UI.WebControls.DropDownList ddlRendszerTipus;
         
         /// <summary>
+        /// btnCalculate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCalculate;
+        
+        /// <summary>
+        /// btnXML control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnXML;
+        
+        /// <summary>
+        /// lblAr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAr;
+        
+        /// <summary>
+        /// edAr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox edAr;
+        
+        /// <summary>
         /// divAjtokSzama control.
         /// </summary>
         /// <remarks>

@@ -79,10 +79,15 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-2">
+                <asp:Button id="btnCalculate" runat="server" Text="Kalkuláció" OnClick="btnCalculate_Click"/>
             </div>
             <div class="col-md-2">
+                <asp:Button id="btnXML" runat="server" Text="WD XML" OnClick="btnXML_Click"/>
             </div>
             <div class="col-md-2">
+                <asp:Label ID="lblAr" runat="server" Text="Ár" />
+                <br />
+                <asp:TextBox ID="edAr" runat="server" AutoPostBack="true" ReadOnly="true" OnTextChanged="edAr_TextChanged" />
             </div>
 
 
