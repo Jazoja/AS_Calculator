@@ -77,19 +77,20 @@
             </div>
 
             <div class="col-md-2">
+                <asp:Button id="btnTest" runat="server" Text="Teszt" OnClick="btnTest_Click"/>
             </div>
-            <div class="col-md-2">
-                <asp:Button id="btnCalculate" runat="server" Text="Kalkuláció" OnClick="btnCalculate_Click"/>
-            </div>
-            <div class="col-md-2">
-                <asp:Button id="btnXML" runat="server" Text="WD XML" OnClick="btnXML_Click"/>
-            </div>
+
             <div class="col-md-2">
                 <asp:Label ID="lblAr" runat="server" Text="Ár" />
                 <br />
                 <asp:TextBox ID="edAr" runat="server" AutoPostBack="true" ReadOnly="true" OnTextChanged="edAr_TextChanged" />
             </div>
 
+            <div class="col-md-2">
+            </div>
+
+            <div class="col-md-2">
+            </div>
 
         </div>
 
@@ -359,6 +360,81 @@
 
         </div>
 
+        <div class="row" runat="server" id="divCalculationControls" style="margin:30px 0">
+            <div class="col-md-2">
+                <asp:CheckBox id="cbCalculation" runat="server" Text="Kalkuláció" OnCheckedChanged="cbCalculation_CheckedChanged" AutoPostBack="true"/>
+            </div>
+
+            <div class="col-md-2">
+            </div>
+
+            <div class="col-md-2">
+            </div>
+
+            <div class="col-md-2">
+                <asp:CheckBox id="cbBontasWD" runat="server" Text="WD bontás" OnCheckedChanged="cbBontasWD_CheckedChanged" AutoPostBack="true"/>
+            </div>
+            
+            <div class="col-md-2">
+                
+            </div>
+
+            <div class="col-md-2">
+                <asp:Button id="btnXML" runat="server" Text="XML mentés" OnClick="btnXML_Click"/>
+            </div>
+        </div>
+
     </div>
 
+    <div class="container-fluid" runat="server" id="divQuotation" >
+        <div class="row">
+
+            <div class="col-md-6">
+                <asp:Table runat="server" ID="tblQuotation" width="50%">
+                    <asp:TableHeaderRow TableSection="TableHeader">
+                        <asp:TableHeaderCell>
+                            #
+                        </asp:TableHeaderCell>
+                        <asp:TableHeaderCell>
+                            <asp:Label Id="lblArticleNumber" Text="Cikkszám" Width="150px" runat="server"/>
+                        </asp:TableHeaderCell>
+                        <asp:TableHeaderCell>
+                            <asp:Label Id="lblArticleName" Text="Név" Width="150px" runat="server"/>
+                            
+                        </asp:TableHeaderCell>
+                        <asp:TableHeaderCell>
+                            <asp:Label Id="lblQuantity" Text="Menny." Width="150px" runat="server"/>
+                        </asp:TableHeaderCell>
+                        <asp:TableHeaderCell>
+                            <asp:Label Id="lblQuantityUnit" Text="M.E" Width="150px" runat="server"/>
+                        </asp:TableHeaderCell>
+                        <asp:TableHeaderCell>
+                            <asp:Label Id="lblPrice" Text="ÁR" Width="150px" runat="server"/>
+                        </asp:TableHeaderCell>
+                        <asp:TableHeaderCell>
+                                
+                        </asp:TableHeaderCell>
+                        <asp:TableHeaderCell>
+                                
+                        </asp:TableHeaderCell>
+
+                    </asp:TableHeaderRow>
+                    
+                    <asp:TableRow TableSection="TableBody">
+
+                    </asp:TableRow>
+                    
+
+                </asp:Table>
+            </div>
+
+            <div class="col-md-6" runat="server" id="divItemsWD">
+                <asp:Table runat="server" ID="tblItemsWD" width="50%">
+
+                </asp:Table>
+            </div>
+
+        </div>
+    </div>
+    
 </asp:Content>

@@ -210,6 +210,9 @@ namespace CalculatorWF
         
         public decimal dAr;
 
+        public bool bShowCalc;
+        public bool bShowBontas;
+
         public struAjto[] rAjto;
 
         public struRendszer(string sState = "default")
@@ -234,6 +237,9 @@ namespace CalculatorWF
             this.dSuly = 0;
 
             this.dAr = 0;
+
+            this.bShowBontas = false;
+            this.bShowCalc = false;
 
             this.rAjto = new struAjto[5];
         }
@@ -266,6 +272,9 @@ namespace CalculatorWF
             
             this.dAr = rRendszer.dAr;
 
+            this.bShowBontas = rRendszer.bShowBontas;
+            this.bShowCalc = rRendszer.bShowCalc;
+
             this.rAjto = new struAjto[rRendszer.rAjto.Length];
             rRendszer.rAjto.CopyTo(this.rAjto,0);
         }
@@ -278,6 +287,7 @@ namespace CalculatorWF
         public struRendfej rFej;
 
         public struRendszer rRendszer;
+        public struTetel[] rKosar;
         public struTetel[] rBontas;
 
         public struSiteVariables(string sMode = "default")
@@ -287,6 +297,7 @@ namespace CalculatorWF
             rFej = new struRendfej();
 
             rRendszer = new struRendszer(sMode);
+            rKosar = new struTetel[0];
             rBontas = new struTetel[0];
         }
 
@@ -297,6 +308,7 @@ namespace CalculatorWF
             this.rFej = rSV.rFej;
 
             this.rRendszer = new struRendszer(rSV.rRendszer);
+            this.rKosar = new struTetel[rSV.rBontas.Length];
             this.rBontas = new struTetel[rSV.rBontas.Length];
             rSV.rBontas.CopyTo(this.rBontas, 0);
         }
@@ -326,6 +338,14 @@ namespace CalculatorWF
         public static bool bLocalMode = false; //a gépemen fut-e a szoftver vagy a szerveren?
         public static bool bDebugMode = true; //Adatbázisba extra adatokat is kiír (üveg ára, munkadíj és bruttó fedezet)
 
+        public static NameValueCollection nvcRendszerTipusok = new NameValueCollection();
+        public static string[] sBeepitesiModok = { "", "P1", "F1", "P2" };
+        public static NameValueCollection nvcNyitasIranyok = new NameValueCollection();
+        public static string[] sBetetTipusok = { "", "B5 D3s", "B5 Es", "B6 P7s", "B6 P1s", "B5 EsMILL", "B5 D3sMILL", "B6 P1Ss", "B6 STS BRs" };
+        public static NameValueCollection nvcVasalatok = new NameValueCollection() { { "0", "Fékező nélkül" }, { "1", "1 fékezővel" }, { "2", "2 fékezővel" } };
+        public static NameValueCollection nvcOpciokToloAjto = new NameValueCollection();
+        public static NameValueCollection nvcOpciokNyiloAjto = new NameValueCollection();
+
         public static string Init(string serverMapPath)
         {
             string sResult = "";
@@ -341,6 +361,33 @@ namespace CalculatorWF
                 bLocalMode = true; //akkor bekapcsolom a local módot
 
             sXMLFileSaveFolderURL = bLocalMode ? sWD_XML_LocalFolder : sWD_ServerFolder + (bTestMode ? @"XML\" : @"WD_ELESXML\");
+
+            nvcRendszerTipusok[""] = "";
+            nvcRendszerTipusok["sliding_door_external"] = "Tolóajtó";
+            nvcRendszerTipusok["sliding_door_in_wall"] = "Falban futó tolóajtó";
+            nvcRendszerTipusok["swing_door_only_normal"] = "Nyíló ajtó - Csak ajtó normál szárny";
+            nvcRendszerTipusok["swing_door_only_fix"] = "Nyíló ajtó - Csak ajtó fix szárny";
+            nvcRendszerTipusok["screen"] = "Screen";
+            nvcRendszerTipusok["swing_door_with_slim_alu_case"] = "Nyíló ajtó aluminium tok 100-125";
+            nvcRendszerTipusok["swing_door_with_thin_alu_case"] = "Nyíló ajtó aluminium tok 125 -";
+
+            nvcNyitasIranyok[""] = "";
+            nvcNyitasIranyok["DIN_right"] = "DIN jobb";
+            nvcNyitasIranyok["DIN_left"] = "DIN bal";
+
+            nvcOpciokToloAjto[""] = "";
+            nvcOpciokToloAjto["one_side_handle_on_right"] = "Egyoldalas húzó jobb oldalon";
+            nvcOpciokToloAjto["one_side_handle_on_left"] = "Egyoldalas húzó bal oldalon";
+            nvcOpciokToloAjto["two_side_handle_on_right"] = "Kétoldalas húzó jobb oldalon";
+            nvcOpciokToloAjto["two_side_handle_on_left"] = "Kétoldalas húzó bal oldalon";
+            nvcOpciokToloAjto["slide_door_lock_on_right"] = "Tolóajtó zár jobb oldalon";
+            nvcOpciokToloAjto["slide_door_lock_on_left"] = "Tolóajtó zár bal oldalon";
+
+            nvcOpciokNyiloAjto[""] = "";
+            nvcOpciokNyiloAjto["handle_without_lock"] = "Kilincs zár nélkül";
+            nvcOpciokNyiloAjto["handle_with_key_lock"] = "Kilincs kulcsos zárral";
+            nvcOpciokNyiloAjto["handle_with_toilet_lock"] = "Kilincs WC zárral";
+
             return sResult;
         }
         
@@ -489,13 +536,13 @@ namespace CalculatorWF
             try
             {
 
-                NameValueCollection[] nvcSzettOut = default(NameValueCollection[]);
+                NameValueCollection[] nvcSzettOut = new NameValueCollection[1];
 
                 SqlDataReader myReader = null;
                 SqlCommand myCommand = new SqlCommand("SELECT top (20) " + sFields + " FROM szett_bontas where cikkszam_szett = '" + sCikkszam + "'", myConnection);
 
                 myReader = myCommand.ExecuteReader();
-                
+
                 NameValueCollection nvcCikkOut = new NameValueCollection();
                 while (myReader.Read())
                 {
@@ -531,6 +578,72 @@ namespace CalculatorWF
             return sResult;
         }
 
+        public static string getSzett(string sSzettCikkszam, ref struTetel[] rSzettBontas)
+        {
+            bool bCikkszamFound = false;
+            string sResult = "";
+
+            SqlConnection myConnection = new SqlConnection(sMSCalcConnection);
+
+            try
+            {
+                myConnection.Open();
+            }
+            catch (Exception ex)
+            {
+                sResult += " Database connection error: " + ex.ToString() + ";";
+            }
+
+            string sFields = "CIKKSZAM_WD, MENNYISEG, ME, E_ATXML81110SE";
+
+            try
+            {
+
+                NameValueCollection[] nvcSzettOut = new NameValueCollection[1];
+
+                SqlDataReader myReader = null;
+                SqlCommand myCommand = new SqlCommand("SELECT top (20) " + sFields + " FROM szett_bontas where cikkszam_szett = '" + sSzettCikkszam + "'", myConnection);
+
+                myReader = myCommand.ExecuteReader();
+                
+                
+                while (myReader.Read())
+                {
+                    bCikkszamFound = true;
+                    int i = 0;
+                    struTetel rTetel = new struTetel();
+
+                    rTetel.sSzettCikkszam = sSzettCikkszam;
+                    
+                    rTetel.sCikkszamWD = (string)myReader["CIKKSZAM_WD"];
+                    rTetel.dMennyiseg = (decimal)myReader["MENNYISEG"];
+                    rTetel.sME = (string)myReader["ME"];
+
+                    Array.Resize(ref rSzettBontas, i + 1);
+                    rSzettBontas[i] = rTetel;
+                    i++;
+                }
+            }
+            catch (Exception ex)
+            {
+                sResult += " Database query error: " + ex.ToString() + ";";
+            }
+
+            try
+            {
+                myConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                sResult += " Database close error: " + ex.ToString() + ";";
+            }
+
+            if (!bCikkszamFound)
+                sResult += " Product ID not found in database: " + sSzettCikkszam + ";";
+
+            return sResult;
+        }
+
         public static string AddTetel(struTetel rTetel, ref struTetel[] rBontas)
         {
             string sResult ="";
@@ -559,7 +672,7 @@ namespace CalculatorWF
             string sResult = "";
 
             struRendszer rRendszer = rSV.rRendszer;
-            struTetel[] rBontas = new struTetel[0];
+            struTetel[] rKosar = new struTetel[0];
             
             if (rRendszer.sRendszerTipus == "sliding_door_external" || rRendszer.sRendszerTipus == "sliding_door_internal" || rRendszer.sRendszerTipus == "swing_door_only_normal" || rRendszer.sRendszerTipus == "swing_door_only_fix" || rRendszer.sRendszerTipus == "screen")
             {
@@ -572,17 +685,17 @@ namespace CalculatorWF
                         struTetel rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "110.160.00";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * rRendszer.nSinekSzama;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "110.110.00";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * 2;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "110.112.00";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * (rRendszer.nSinekSzama - 1);
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                     }
 
@@ -591,17 +704,17 @@ namespace CalculatorWF
                         struTetel rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "110.160.00";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * rRendszer.nSinekSzama;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "110.161.00";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * 2;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "6116";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000 * rRendszer.nSinekSzama;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                     }
 
@@ -610,17 +723,17 @@ namespace CalculatorWF
                         struTetel rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "110.160.00";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "110.100.00";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "110.110.00";
                         rTetel.dMennyiseg = rRendszer.nSinHossz / 1000;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                     }
 
@@ -629,7 +742,7 @@ namespace CalculatorWF
                         struTetel rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "140.180.00";
                         rTetel.dMennyiseg = rRendszer.nSinekSzama * 2;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
                     int nFekezok = 0;
@@ -647,7 +760,7 @@ namespace CalculatorWF
                         struTetel rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "430.101.00";
                         rTetel.dMennyiseg = nFekezosVasalat;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
                     if (nFekezoNelkuliVasalat > 0)
@@ -655,7 +768,7 @@ namespace CalculatorWF
                         struTetel rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "430.111.00";
                         rTetel.dMennyiseg = nFekezoNelkuliVasalat;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
                     if (rSV.rRendszer.sBeepitesiMod.StartsWith("P")) //sín rögzítő csavar szett
@@ -663,7 +776,7 @@ namespace CalculatorWF
                         struTetel rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "650.020.11";
                         rTetel.dMennyiseg = rRendszer.nSinekSzama * Math.Round((decimal)(2 + (rRendszer.nSinHossz / 1000) * 3));
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
                     if (rSV.rRendszer.sBeepitesiMod == "F1")
@@ -671,12 +784,12 @@ namespace CalculatorWF
                         struTetel rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "150.000.11";
                         rTetel.dMennyiseg = rRendszer.nSinekSzama * Math.Round((decimal)(2 + (rRendszer.nSinHossz / 1000) * 3));
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "150.010.11";
                         rTetel.dMennyiseg = rRendszer.nSinekSzama * Math.Round((decimal)(2 + (rRendszer.nSinHossz / 1000) * 3));
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
 
                     }
                 }
@@ -692,12 +805,12 @@ namespace CalculatorWF
                     struTetel rTetel = new struTetel();
                     rTetel.sCikkszamKalk = "ATL-200";
                     rTetel.dMennyiseg = (rAjto.nSzelesseg + rAjto.nMagassag) / 1000 * 2;
-                    AddTetel(rTetel, ref rBontas);
+                    AddTetel(rTetel, ref rKosar);
 
                     rTetel = new struTetel();
                     rTetel.sCikkszamKalk = "ATL-210";
                     rTetel.dMennyiseg = (rAjto.nMagassag) / 1000 * 2;
-                    AddTetel(rTetel, ref rBontas);
+                    AddTetel(rTetel, ref rKosar);
                     
 
                     if (rSV.rRendszer.sRendszerTipus == "sliding_door_in_wall") //extra profil az ajtó oldalára
@@ -705,7 +818,7 @@ namespace CalculatorWF
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = "ATL-161";
                         rTetel.dMennyiseg = (rAjto.nSzelesseg + rAjto.nMagassag) / 1000 * 2;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     
                         //itt van még valami jobb/bal cucc
                     }
@@ -714,7 +827,7 @@ namespace CalculatorWF
                     rTetel = new struTetel();
                     rTetel.sCikkszamKalk = rAjto.sBetetID;
                     rTetel.dMennyiseg = (rAjto.nMagassag * rAjto.nSzelesseg) / 1000; //betét felülete
-                    AddTetel(rTetel, ref rBontas);
+                    AddTetel(rTetel, ref rKosar);
 
                     //osztó
                     if(rAjto.nOsztokSzama > 0)
@@ -724,7 +837,7 @@ namespace CalculatorWF
                         rTetel.nDarab = rAjto.nOsztokSzama;
                         rTetel.nHosszusag = rAjto.nSzelesseg - 62;
                         rTetel.dMennyiseg = (rTetel.nHosszusag) / 1000 * rTetel.nDarab;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
 
@@ -733,13 +846,13 @@ namespace CalculatorWF
                         rTetel = new struTetel();
                         rTetel.sCikkszamKalk = rAjto.sBetetID.StartsWith("B5") ? "PUXV5" : "U7X4M";
                         rTetel.dMennyiseg = (rAjto.nMagassag + rAjto.nSzelesseg) / 1000 * 2;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
                     rTetel = new struTetel();
                     rTetel.sCikkszamKalk = "U2P";
                     rTetel.dMennyiseg = rAjto.nMagassag / 1000 * 2;
-                    AddTetel(rTetel, ref rBontas);
+                    AddTetel(rTetel, ref rKosar);
 
                     if (rSV.rRendszer.sRendszerTipus == "sliding_door_external" || rSV.rRendszer.sRendszerTipus == "sliding_door_in_wall")
                     {
@@ -774,7 +887,7 @@ namespace CalculatorWF
                         }
                         
                         rTetel.dMennyiseg = 1;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
                     if (rSV.rRendszer.sRendszerTipus == "swing_door_only_normal")
@@ -793,7 +906,7 @@ namespace CalculatorWF
                                 break;
                         }
                         rTetel.dMennyiseg = 1;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
                     if (rSV.rRendszer.sRendszerTipus == "sliding_door_external")
@@ -820,7 +933,7 @@ namespace CalculatorWF
                                 break;
                         }
                         rTetel.dMennyiseg = 1;
-                        AddTetel(rTetel, ref rBontas);
+                        AddTetel(rTetel, ref rKosar);
                     }
 
                 }
@@ -837,22 +950,22 @@ namespace CalculatorWF
                 struTetel rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "ATL-801";
                 rTetel.dMennyiseg = ((rRendszer.nNyilasMagassag + 27) * 2 + (rRendszer.nNyilasSzelesseg + 54)) / 1000;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
 
                 rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "ATL-802";
                 rTetel.dMennyiseg = ((rRendszer.nNyilasMagassag + 40) * 2 + (rRendszer.nNyilasSzelesseg + 80)) / 1000;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
 
                 rTetel = new struTetel();
                 rTetel.sCikkszamKalk = rRendszer.sRendszerTipus == "swing_door_with_slim_alu_case" ? "ATL-804" : "ATL-803";
                 rTetel.dMennyiseg = ((rRendszer.nNyilasMagassag + 40) * 2 + (rRendszer.nNyilasSzelesseg + 80)) / 1000;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
 
                 rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "ATL-SWJ";
                 rTetel.dMennyiseg = 1;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
 
             } //tok vége
             
@@ -862,12 +975,12 @@ namespace CalculatorWF
                 struTetel rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "SERV-SLT";
                 rTetel.dMennyiseg = 1;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
 
                 rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "SERV-SL";
                 rTetel.dMennyiseg = rRendszer.nAjtokSzama;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
             }
 
             if (rRendszer.sRendszerTipus == "sliding_door_internal")
@@ -875,7 +988,7 @@ namespace CalculatorWF
                 struTetel rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "SERV-FF";
                 rTetel.dMennyiseg = 1;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
             }
 
             if (rRendszer.sRendszerTipus == "swing_door_only_normal")
@@ -883,7 +996,7 @@ namespace CalculatorWF
                 struTetel rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "SERV-SW";
                 rTetel.dMennyiseg = 1;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
             }
 
             if (rRendszer.sRendszerTipus == "swing_door_only_fix")
@@ -891,7 +1004,7 @@ namespace CalculatorWF
                 struTetel rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "SERV-SWF";
                 rTetel.dMennyiseg = 1;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
             }
 
             if (rRendszer.sRendszerTipus == "screen")
@@ -899,7 +1012,7 @@ namespace CalculatorWF
                 struTetel rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "SERV-SC";
                 rTetel.dMennyiseg = 1;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
             }
 
             if (rRendszer.sRendszerTipus == "swing_door_with_slim_alu_case" || rRendszer.sRendszerTipus == "swing_door_with_thin_alu_case")
@@ -907,7 +1020,7 @@ namespace CalculatorWF
                 struTetel rTetel = new struTetel();
                 rTetel.sCikkszamKalk = "SERV-SWJ";
                 rTetel.dMennyiseg = 1;
-                AddTetel(rTetel, ref rBontas);
+                AddTetel(rTetel, ref rKosar);
             }
 
             NameValueCollection nvcCikkKalk = new NameValueCollection();
@@ -917,10 +1030,10 @@ namespace CalculatorWF
             nvcCikkKalk["EGYSEGAR"] = "";
 
             rRendszer.dAr = 0;
-            for (int i = 0; i < rBontas.Length; i++ )
+            for (int i = 0; i < rKosar.Length; i++ )
             {
                 struTetel rTetel = new struTetel();
-                rTetel = rBontas[i];
+                rTetel = rKosar[i];
 
                 nvcCikkKalk["CIKKSZAM_KALK"] = rTetel.sCikkszamKalk;
                 sResult += getKalkCikk(ref nvcCikkKalk);
@@ -932,8 +1045,18 @@ namespace CalculatorWF
                 rTetel.dAr = rTetel.dEgysegAr * rTetel.dMennyiseg;
                 rRendszer.dAr += rTetel.dAr;
 
+                rKosar[i] = rTetel;
+            }
+
+            /*
+            for (int i = 0; i < rKosar.Length; i++) //szettek bontása
+            {
+                struTetel rTetel = new struTetel();
+                rTetel = rKosar[i];
+
                 if (rTetel.sME == "szet")
                 {
+
                     NameValueCollection[] nvcSzett = new NameValueCollection[1];
                     NameValueCollection nvcSzettCikk = new NameValueCollection();
 
@@ -955,20 +1078,36 @@ namespace CalculatorWF
                         rSzettBontas.sCikkszamWD = nvcCikk["CIKKSZAM_WD"];
                         rSzettBontas.sSzettCikkszam = nvcCikk["CIKKSZAM_SZETT"];
                         rSzettBontas.sNev = nvcCikk["MEGNEVEZES"];
+                        Decimal.TryParse(nvcCikk["MENNYISEG"], out rSzettBontas.dMennyiseg);
                         rSzettBontas.sME = nvcCikk["ME"];
+
                         rSzettBontas.sMuveletNev = nvcCikk["E_ATXML81110SE"];
                         sResult += AddTetel(rSzettBontas, ref rTetel.rBontas);
                     }
-                    
 
+                    rKosar[i] = rTetel;
                 }
-                
-                rBontas[i] = rTetel;
+            }
+            */
 
+            for (int i = 0; i < rKosar.Length; i++) //szettek bontása
+            {
+                struTetel rTetel = rKosar[i];
+
+                if (rTetel.sME == "szet")
+                {
+                    struTetel[] rSzettBontas = new struTetel[0];
+
+                    sResult += getSzett(rTetel.sCikkszamKalk, ref rSzettBontas);
+
+                    rTetel.rBontas = rSzettBontas.Length == 0 ? null : rSzettBontas;
+
+                    rKosar[i] = rTetel;
+                }
             }
 
             struTetel[] rBovitettBontas = new struTetel[0];
-            foreach (struTetel rTetel in rBontas)
+            foreach (struTetel rTetel in rKosar)
             {
                 if (rTetel.rBontas == null)
                     AddTetel(rTetel, ref rBovitettBontas);
@@ -984,8 +1123,9 @@ namespace CalculatorWF
                 rBovitettBontas[i].sCikksz = rBovitettBontas[i].sCikkszamWD;
             }
 
-                rSV.rBontas = rBovitettBontas;
-
+            rSV.rKosar = rKosar;
+            rSV.rBontas = rBovitettBontas;
+            
             rSV.rRendszer = rRendszer;
 
            return sResult;

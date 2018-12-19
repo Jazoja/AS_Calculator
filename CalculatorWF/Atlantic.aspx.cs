@@ -106,7 +106,7 @@ namespace CalculatorWF
 
                 }
 
-                if (rSV.rRendszer.sRendszerTipus == "swing_door_normal")
+                if (rSV.rRendszer.sRendszerTipus == "swing_door_only_normal")
                 {
                     divNyitasIranya.Visible = true;
                     divAjtokSzama.Visible = true;
@@ -127,7 +127,7 @@ namespace CalculatorWF
 
                 }
 
-                if (rSV.rRendszer.sRendszerTipus == "swing_door_fix")
+                if (rSV.rRendszer.sRendszerTipus == "swing_door_only_fix")
                 {
                     divNyitasIranya.Visible = true;
                     divAjtokSzama.Visible = true;
@@ -164,7 +164,7 @@ namespace CalculatorWF
                     divOsztokSzamaAjto1.Visible = true;
                 }
 
-                if (rSV.rRendszer.sRendszerTipus == "swing_slim")
+                if (rSV.rRendszer.sRendszerTipus == "swing_door_with_slim_alu_case")
                 {
                     divNyilasMeretek.Visible = true;
 
@@ -176,7 +176,7 @@ namespace CalculatorWF
                     divOsztokSzamaAjto1.Visible = true;
                 }
 
-                if (rSV.rRendszer.sRendszerTipus == "swing_thin")
+                if (rSV.rRendszer.sRendszerTipus == "swing_door_with_thin_alu_case")
                 {
                     divNyilasMeretek.Visible = true;
 
@@ -221,27 +221,15 @@ namespace CalculatorWF
                 ddlOsztokSzamaAjto4.Visible = true;
                 ddlOpciokToloAjto4.Visible = true;
 
-                NameValueCollection nvcRendszerTipusok = new NameValueCollection();
-
-                nvcRendszerTipusok[""] = "";
-                nvcRendszerTipusok["sliding_door_external"] = "Tolóajtó";
-                nvcRendszerTipusok["sliding_door_in_wall"] = "Falban futó tolóajtó";
-                nvcRendszerTipusok["swing_door_only_normal"] = "Nyíló ajtó - Csak ajtó normál szárny";
-                nvcRendszerTipusok["swing_door_only_fix"] = "Nyíló ajtó - Csak ajtó fix szárny";
-                nvcRendszerTipusok["screen"] = "Screen";
-                nvcRendszerTipusok["swing_door_with_slim_alu_case"] = "Nyíló ajtó aluminium tok 100-125";
-                nvcRendszerTipusok["swing_door_with_thin_alu_case"] = "Nyíló ajtó aluminium tok 125 -";
-
-                foreach (string sRendszerTipusID in nvcRendszerTipusok)
+                foreach (string sRendszerTipusID in Common.nvcRendszerTipusok)
                 {
-                    string sRendszerTipusNev = nvcRendszerTipusok[sRendszerTipusID];
+                    string sRendszerTipusNev = Common.nvcRendszerTipusok[sRendszerTipusID];
                     ListItem liRendszerTipus = new ListItem(sRendszerTipusNev, sRendszerTipusID);
                     ddlRendszerTipus.Items.Add(liRendszerTipus);
                 }
                 ddlRendszerTipus.SelectedValue = rSV.rRendszer.sRendszerTipus;
 
-                string[] sBeepitesiModok = { "", "P1", "F1", "P2" };
-                foreach (string sBeepMod in sBeepitesiModok)
+                foreach (string sBeepMod in Common.sBeepitesiModok)
                 {
                     ddlBeepitesiMod.Items.Add(sBeepMod);
                 }
@@ -261,22 +249,15 @@ namespace CalculatorWF
                 }
                 ddlAjtokSzama.SelectedValue = rSV.rRendszer.nAjtokSzama.ToString();
 
-                NameValueCollection nvcNyitasIranyok = new NameValueCollection();
-
-                nvcNyitasIranyok[""] = "";
-                nvcNyitasIranyok["din_right"] = "DIN jobb";
-                nvcNyitasIranyok["din_left"] = "DIN bal";
-                
-                foreach(string sNyitasIranyID in nvcNyitasIranyok)
+                foreach(string sNyitasIranyID in Common.nvcNyitasIranyok)
                 {
-                    string sNyitasIranyNev = nvcNyitasIranyok[sNyitasIranyID];
+                    string sNyitasIranyNev = Common.nvcNyitasIranyok[sNyitasIranyID];
                     ListItem liNyitasIrany = new ListItem(sNyitasIranyNev, sNyitasIranyID);
                     ddlNyitasIrany.Items.Add(liNyitasIrany);
                 }
                 ddlNyitasIrany.SelectedValue = rSV.rRendszer.sNyitasIranyID;
 
-                string[] sBetetTipusok = { "", "B5 D3s", "B5 Es", "B6 P7s", "B6 P1s", "B5 EsMILL", "B5 D3sMILL", "B6 P1Ss", "B6 STS BRs" };
-                foreach (string sBetetTipus in sBetetTipusok)
+                foreach (string sBetetTipus in Common.sBetetTipusok)
                 {
                     ddlAjtoBetet1.Items.Add(sBetetTipus);
                     ddlAjtoBetet2.Items.Add(sBetetTipus);
@@ -288,11 +269,9 @@ namespace CalculatorWF
                 ddlAjtoBetet3.SelectedValue = rSV.rRendszer.rAjto[3].sBetetID;
                 ddlAjtoBetet4.SelectedValue = rSV.rRendszer.rAjto[4].sBetetID;
 
-                NameValueCollection nvcVasalatok = new NameValueCollection() { {"0", "Fékező nélkül" }, { "1", "1 fékezővel" }, { "2", "2 fékezővel" } };
-
-                foreach (string sVasalatID in nvcVasalatok)
+                foreach (string sVasalatID in Common.nvcVasalatok)
                 {
-                    string sVasalatNev = nvcVasalatok[sVasalatID];
+                    string sVasalatNev = Common.nvcVasalatok[sVasalatID];
 
                     ListItem liVasalat = new ListItem(sVasalatNev, sVasalatID);
                     ddlVasalat1.Items.Add(liVasalat);
@@ -322,18 +301,9 @@ namespace CalculatorWF
                 ddlOsztokSzamaAjto3.SelectedValue = rSV.rRendszer.rAjto[3].nOsztokSzama.ToString();
                 ddlOsztokSzamaAjto4.SelectedValue = rSV.rRendszer.rAjto[4].nOsztokSzama.ToString();
 
-                NameValueCollection nvcOpciokToloAjto = new NameValueCollection();
-                nvcOpciokToloAjto[""] = "";
-                nvcOpciokToloAjto["one_side_handle_on_right"] = "Egyoldalas húzó jobb oldalon";
-                nvcOpciokToloAjto["one_side_handle_on_left"] = "Egyoldalas húzó bal oldalon";
-                nvcOpciokToloAjto["two_side_handle_on_right"] = "Kétoldalas húzó jobb oldalon";
-                nvcOpciokToloAjto["two_side_handle_on_left"] = "Kétoldalas húzó bal oldalon";
-                nvcOpciokToloAjto["slide_door_lock_on_right"] = "Tolóajtó zár jobb oldalon";
-                nvcOpciokToloAjto["slide_door_lock_on_left"] = "Tolóajtó zár bal oldalon";
-
-                foreach (string sOpcioID in nvcOpciokToloAjto)
+                foreach (string sOpcioID in Common.nvcOpciokToloAjto)
                 {
-                    string sOpcioNev = nvcOpciokToloAjto[sOpcioID];
+                    string sOpcioNev = Common.nvcOpciokToloAjto[sOpcioID];
 
                     ListItem liOpcio = new ListItem(sOpcioNev, sOpcioID);
                     ddlOpciokToloAjto1.Items.Add(liOpcio);
@@ -350,15 +320,9 @@ namespace CalculatorWF
                 ddlOpciokToloAjto3.SelectedValue = rSV.rRendszer.rAjto[3].sOpciokToloAjtoID;
                 ddlOpciokToloAjto4.SelectedValue = rSV.rRendszer.rAjto[4].sOpciokToloAjtoID;
 
-                NameValueCollection nvcOpciokNyiloAjto = new NameValueCollection();
-                nvcOpciokNyiloAjto[""] = "";
-                nvcOpciokNyiloAjto["handle_without_lock"] = "Kilincs zár nélkül";
-                nvcOpciokNyiloAjto["handle_with_key_lock"] = "Kilincs kulcsos zárral";
-                nvcOpciokNyiloAjto["handle_with_toilet_lock"] = "Kilincs WC zárral";
-
-                foreach (string sOpcioID in nvcOpciokNyiloAjto)
+                foreach (string sOpcioID in Common.nvcOpciokNyiloAjto)
                 {
-                    string sOpcioNev = nvcOpciokNyiloAjto[sOpcioID];
+                    string sOpcioNev = Common.nvcOpciokNyiloAjto[sOpcioID];
 
                     ListItem liOpcio = new ListItem(sOpcioNev, sOpcioID);
                     ddlOpciokNyiloAjto1.Items.Add(liOpcio);
@@ -392,11 +356,24 @@ namespace CalculatorWF
                 edNyilasSzelesseg.Text = rSV.rRendszer.nNyilasSzelesseg.ToString();
                 edFalvastagsag.Text = rSV.rRendszer.nFalVastagsag.ToString();
 
+                cbCalculation.Checked = rSV.rRendszer.bShowCalc;
+                cbBontasWD.Checked = rSV.rRendszer.bShowBontas;
+
+                divQuotation.Visible = rSV.rRendszer.bShowCalc;
+                divItemsWD.Visible = rSV.rRendszer.bShowBontas;
+
+                string sResult = Common.calculate(ref rSV);
+                
                 edAr.Text = rSV.rRendszer.dAr.ToString();
+                
+                if(rSV.rRendszer.bShowCalc)
+                    DisplayQuotation(ref rSV);
+
+                if (rSV.rRendszer.bShowBontas)
+                    DisplayItemsWD(ref rSV);
             }
 
 
-            
 
         }
 
@@ -544,14 +521,235 @@ namespace CalculatorWF
 
         }
 
-        protected void btnCalculate_Click(object sender, EventArgs e)
+
+        protected void DisplayQuotation(ref struSiteVariables rSV)
         {
-            string sResult = Common.calculate(ref rSV);
+            struTetel[] rKosar = rSV.rKosar;
+
+            int nTetel = 0;
+            foreach (struTetel rTetel in rKosar)
+            {
+                nTetel++;
+
+                TableRow row = new TableRow();
+                row.TableSection = TableRowSection.TableBody;
+                TableCell cell = new TableCell();
+                /*
+                cell.HorizontalAlign = HorizontalAlign.Center;
+                cell.Width = new Unit("100%");
+                cell.Font.Size = FontUnit.Large;
+                cell.Font.Bold = true;
+                */
+                cell.Text = nTetel.ToString();
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+                    cell.Width = 800;
+                    cell.Text = rTetel.sCikkszamKalk.ToString();
+                }
+                catch(Exception ex)
+                {
+                    cell.Text = "Error";
+                }
+
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+
+                    cell.Text = rTetel.sCikkszamWD.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error";
+                }
+
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+
+                    cell.Text = rTetel.dMennyiseg.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error";
+                }
+
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+
+                    cell.Text = rTetel.sME.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error";
+                }
+
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+
+                    cell.Text = rTetel.nDarab.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error";
+                }
+
+                row.Cells.Add(cell);
+                
+
+                tblQuotation.Rows.Add(row);
+
+            }
+        }
+
+        protected void DisplayItemsWD(ref struSiteVariables rSV)
+        {
+            struTetel[] rBontas = rSV.rBontas;
+
+            int nTetel = 0;
+            foreach (struTetel rTetel in rBontas)
+            {
+                nTetel++;
+
+                TableRow row = new TableRow();
+                TableCell cell = new TableCell();
+                /*
+                cell.HorizontalAlign = HorizontalAlign.Center;
+                cell.Width = new Unit("100%");
+                cell.Font.Size = FontUnit.Large;
+                cell.Font.Bold = true;
+                */
+                cell.Text = nTetel.ToString();
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+                    cell.Width = 200;
+                    cell.Text = rTetel.sCikkszamKalk.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error: " + ex;
+                }
+
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+
+                    cell.Text = rTetel.sCikkszamWD.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error: " + ex;
+                }
+
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+
+                    cell.Text = rTetel.dMennyiseg.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error: " + ex;
+                }
+
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+
+                    cell.Text = rTetel.sME.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error: " + ex;
+                }
+
+                row.Cells.Add(cell);
+
+                cell = new TableCell();
+
+                try
+                {
+
+                    cell.Text = rTetel.nDarab.ToString();
+                }
+                catch (Exception ex)
+                {
+                    cell.Text = "Error: " + ex;
+                }
+
+                row.Cells.Add(cell);
+
+                tblItemsWD.Rows.Add(row);
+            }
         }
 
         protected void btnXML_Click(object sender, EventArgs e)
         {
             Common.SaveToWD(rSV);
+        }
+
+        protected void btnTest_Click(object sender, EventArgs e)
+        {
+            rSV.rRendszer.sRendszerTipus = "sliding_door_external";
+            rSV.rRendszer.sNyitasIranyID = "DIN_right";
+            rSV.rRendszer.nAjtokSzama = 4;
+            rSV.rRendszer.sBeepitesiMod = "P1";
+            Random rnd = new Random();
+            rSV.rRendszer.nSinekSzama = 2; //rnd.Next(5);
+            rSV.rRendszer.nSinHossz = 2000; // +rnd.Next(2000);
+            rSV.rRendszer.nNyilasMagassag = 2000;
+            rSV.rRendszer.nNyilasSzelesseg = 1000;
+
+            for(int i = 1; i <= rSV.rRendszer.nAjtokSzama; i++)
+            {
+                rSV.rRendszer.rAjto[i].sBetetID = "B5 D3s";
+                rSV.rRendszer.rAjto[i].sVasalatID = "1";
+                rSV.rRendszer.rAjto[i].sOpciokToloAjtoID = "one_side_handle_on_right";
+                rSV.rRendszer.rAjto[i].sOpciokNyiloAjtoID = "handle_without_lock";
+                rSV.rRendszer.rAjto[i].nMagassag = 2000;
+                rSV.rRendszer.rAjto[i].nSzelesseg = 1000;
+                rSV.rRendszer.rAjto[i].nOsztokSzama = 1;
+            }
+        }
+
+        protected void cbCalculation_CheckedChanged(object sender, EventArgs e)
+        {
+            rSV.rRendszer.bShowCalc = cbCalculation.Checked;
+        }
+
+        protected void cbBontasWD_CheckedChanged(object sender, EventArgs e)
+        {
+            rSV.rRendszer.bShowBontas = cbBontasWD.Checked;
         }
 
 
